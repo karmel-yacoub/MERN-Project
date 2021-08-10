@@ -24,6 +24,9 @@
     "express": "^4.17.1",
     "mongoose": "^5.13.5",
     "mongoose-type-email": "^1.1.2",
-    "mongoose-unique-validator": "^2.0.3"
+    "mongoose-unique-validator": "^2.0.3",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   }
 }
