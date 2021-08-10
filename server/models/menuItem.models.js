@@ -19,7 +19,7 @@ const MenuItemSchema = new mongoose.Schema({
         contentType:String,
     },
 
-    user:[UserSchema]
+    customer:[UserSchema]
 
  } , {timestamps: true})
 
