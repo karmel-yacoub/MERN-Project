@@ -1,3 +1,6 @@
 const UserController = require('../controllers/user.controllers')
+const upload = require('../multer')
 
-app.post('/', upload.single('image'), UserController.createUser)
+module.exports = (app) => {
+    app.post('/', upload.single('image'), UserController.createUser)
+}

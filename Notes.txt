@@ -1,0 +1,19 @@
+for Validation
+Find + Updates
+
+When using findOneAndUpdate and related methods, mongoose doesn't automatically run validation. To trigger this, you need to pass a configuration object. For technical reasons, this plugin requires that you also set the context option to query.
+
+{ runValidators: true, context: 'query' }
+
+A full example:
+
+User.findOneAndUpdate(
+    { email: 'old-email@example.com' },
+    { email: 'new-email@example.com' },
+    { runValidators: true, context: 'query' },
+    function(err) {
+        // ...
+    }
+)
+
+--------------------------------------------------------------------------

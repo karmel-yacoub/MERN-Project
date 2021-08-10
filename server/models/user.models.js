@@ -12,28 +12,28 @@ const UserSchema = new mongoose.Schema({
      },
 
     email: {
-            email:mongoose.SchemaTypes.Email,
+            type:mongoose.SchemaTypes.Email,
             required:true,
             index:true,
             unique:true,
              },
     password:{
-            type:string,
+            type:String,
             required:true,
             minlength:[8,"Password must be at least 8 charachters"]
     },
     phone:{
-            type:string,
+            type:String,
             required:true,
             allowBlank:false,
              
         },
     location:{
-        type:string,
+        type:String,
         required:true,
     },
     genre:{
-        type:string,
+        type:String,
         enum:['customer','resturent','delivery'],
         defult:'customer',
         required:true,
@@ -73,4 +73,5 @@ UserSchema.methods.comparePassword = function(password, cb) {
     })
 }
 
+module.exports.UserSchema = UserSchema
 module.exports.User = mongoose.model('User', UserSchema);
