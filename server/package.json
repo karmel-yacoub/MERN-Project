@@ -1,5 +1,5 @@
 {
-  "name": "MERN-Project",
+  "name": "mern-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/karmel-yacoub/MERN-Project#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.13.5",
