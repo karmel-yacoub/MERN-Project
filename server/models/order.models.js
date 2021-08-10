@@ -8,9 +8,9 @@ const OrderSchema = new mongoose.Schema({
         required:[true, "Price should be present"],
     },
 
-    customer:[UserSchema],
-    delivery:[UserSchema],
-    resturent:[UserSchema],
+    customer:UserSchema,
+    delivery:UserSchema,
+    resturent:UserSchema,
     status:{
         enum:['requested','accepted','readyToDeliver','inWay','delivered'],
         required:true

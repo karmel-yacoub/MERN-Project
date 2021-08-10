@@ -1,4 +1,4 @@
-const { UserSchema} = require('../models/user.models');
+// const { UserSchema } = require('../models/user.models');
 const mongoose = require('mongoose');
 const MenuItemSchema = new mongoose.Schema({
     name:{
@@ -19,9 +19,8 @@ const MenuItemSchema = new mongoose.Schema({
         contentType:String,
     },
 
-    customer:[UserSchema]
-
  } , {timestamps: true})
 
 
+module.exports.MenuItemSchema =  MenuItemSchema;
 module.exports.MenuItem = mongoose.model('MenuItem', MenuItemSchema);
