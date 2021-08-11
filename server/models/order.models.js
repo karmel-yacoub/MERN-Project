@@ -1,4 +1,4 @@
-const { UserSchema} = require('../models/user.models');
+const {UserSchema} = require('../models/user.models');
 
 const mongoose = require('mongoose');
 const OrderSchema = new mongoose.Schema({
@@ -13,10 +13,10 @@ const OrderSchema = new mongoose.Schema({
     resturent:UserSchema,
     status:{
         enum:['requested','accepted','readyToDeliver','inWay','delivered'],
-        required:true
+    
     }
 
 } , {timestamps: true})
 
-
+module.exports.OrderSchema =  OrderSchema;
 module.exports.Order = mongoose.model('Order', OrderSchema);

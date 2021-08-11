@@ -1,5 +1,6 @@
 const {User} =require('../models/user.models')
 const {MenuItem}= require('../models/menuItem.models');
+const {Order}= require('../models/order.models');
 // import menuitem model
 const passport = require('passport');
 const passportConfig = require('../passport');
@@ -81,3 +82,20 @@ module.exports.createMenuItem = (req , res) => {
     )
 
 }
+
+module.exports.createOrder = (req , res) => {
+    const {price , customerId , resturentId , deliveryId} = req.body;
+    Order.create({
+        price,
+        status:'requested'
+    })
+    .then(
+        order => {
+            order.customer = User.findOne({_id:customerId})
+            order.resturent = User.findOne({_id:resturentId}) 
+            order.save()
+            .then(order => res.json(order))   
+        }
+    )
+}
+
