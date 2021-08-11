@@ -12,6 +12,7 @@ app.use(passport.initialize());
 app.use(cookieParser());
 
 require('./routes/user.routes')(app);
+require('./routes/menuItem.routes')(app);
 app.listen(8000, () => {
     console.log("Listening at Port 8000")
 })

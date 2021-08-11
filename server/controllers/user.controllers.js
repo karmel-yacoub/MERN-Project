@@ -43,3 +43,19 @@ module.exports.login = (req, res) => {
         res.status(200).json({isAuthenticated: true, user: {name, genre,k:"sds"}});
     }
 }
+
+module.exports.addToMenu = (req , res) => {
+    const{name , price , description,picture } = req.body;
+    const item = await MenuItem.create({
+        name,
+        price,
+        description,
+        // picture :{
+        //     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+        //     contentType: 'image/png'
+        // }
+    });
+    // find resturant 
+    // add item to resturant's menu
+
+}

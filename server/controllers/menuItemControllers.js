@@ -10,10 +10,10 @@ module.exports.createMenuItem=(req,res) => {
         name,
         price,
         description,
-        picture :{
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-            contentType: 'image/png'
-        }
+        // picture :{
+        //     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+        //     contentType: 'image/png'
+        // }
     })
     .then(MenuItems => res.json(MenuItems ))
     .catch(err => res.json(err))
