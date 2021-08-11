@@ -1,4 +1,6 @@
 const {User} =require('../models/user.models')
+const {MenuItem}= require('../models/menuItem.models');
+// import menuitem model
 const passport = require('passport');
 const passportConfig = require('../passport');
 const JWT = require('jsonwebtoken');
@@ -44,9 +46,21 @@ module.exports.login = (req, res) => {
     }
 }
 
-module.exports.addToMenu = (req , res) => {
-    const{name , price , description,picture } = req.body;
-    const item = await MenuItem.create({
+module.exports.getOneUser = (req, res) => {
+    User.findOne({_id:req.params.id})
+        .then(user => res.json(user))
+        .catch(err => res.json(err))
+}
+
+module.exports.getAllUsers = (req, res) => {
+    User.find({})
+    .then(user => res.json(user))
+    .catch(err => res.json(err))
+}
+
+module.exports.createMenuItem = (req , res) => {
+    const{name , price , description,picture , id } = req.body; 
+    MenuItem.create({
         name,
         price,
         description,
@@ -54,8 +68,16 @@ module.exports.addToMenu = (req , res) => {
         //     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
         //     contentType: 'image/png'
         // }
-    });
-    // find resturant 
-    // add item to resturant's menu
+    })
+    .then(
+        item => {
+            User.findOne({_id:id})
+            .then(resturaunt => {
+            resturaunt.menu.push(item)
+            resturaunt.save()
+            .then(resturaunt => res.json(resturaunt))
+        })
+        }
+    )
 
 }
