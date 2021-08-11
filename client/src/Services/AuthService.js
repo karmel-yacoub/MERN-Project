@@ -13,8 +13,8 @@ export default {
         return axios.post("/logout")
         .then(res => res.data)
     },
-    isAuthenticated: () => {
-        return axios.post("/authenticated", user)
+    isAuthenticated: (user) => {
+        return axios.get("http://localhost:8000/authenticated")
         .then(res => {
             if (res.status !== 401) {
                 return res.data;
@@ -22,6 +22,9 @@ export default {
             else {
                 return  {isAuthenticated: false, user: {name:"", genre:""}}
             }
+        })
+        .catch(err => {
+            return  {isAuthenticated: false, user: {name:"", genre:""}}
         })
     }
 }
