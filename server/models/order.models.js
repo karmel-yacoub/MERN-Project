@@ -10,12 +10,12 @@ const OrderSchema = new mongoose.Schema({
         required:[true, "Price should be present"],
     },
 
-    customer:[{ type: Schema.Types.ObjectId, ref: 'User'}],
-    delivery:[{ type: Schema.Types.ObjectId, ref: 'User'}],
-    resturent:[{ type: Schema.Types.ObjectId, ref: 'User'}],
+    customer:{ type: Schema.Types.ObjectId, ref: 'User'},
+    delivery:{ type: Schema.Types.ObjectId, ref: 'User'},
+    resturent:{ type: Schema.Types.ObjectId, ref: 'User'},
     status:{
+        type: String,
         enum:['requested','accepted','readyToDeliver','inWay','delivered'],
-    
     }
 
 } , {timestamps: true})

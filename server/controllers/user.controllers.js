@@ -84,18 +84,26 @@ module.exports.createMenuItem = (req , res) => {
 }
 
 module.exports.createOrder = (req , res) => {
-    const {price , customerId , resturentId , deliveryId} = req.body;
+    const {price , customerId , resturentId } = req.body;
     Order.create({
         price,
         status:'requested'
     })
     .then(
-        order => {
-            order.customer = customerId
-            order.resturent = resturentId
+        async order => {
+            order.customer = await User.findOne({_id:customerId}).name
+            order.resturent = await User.findOne({_id:resturentId}).name
             order.save()
             .then(order => res.json(order))   
         }
     )
 }
-
+module.exports.deliveryOrderUpdate = (request, response) => {
+    Order.findOneAndUpdate({_id: request.params.id}, deliveryId,  request.body, {new:true , runValidators:true} )
+        .then(
+            async updatedAuthor => {
+                order.delivery = await User.findOne({_id:deliveryId})
+                order.status = 'inWay'
+            })
+        .catch(err => response.status(400).json(err))
+}
