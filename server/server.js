@@ -13,6 +13,7 @@ app.use(cookieParser());
 
 require('./routes/user.routes')(app);
 require('./routes/menuItem.routes')(app);
+require('./routes/order.routes')(app);
 app.listen(8000, () => {
     console.log("Listening at Port 8000")
 })
