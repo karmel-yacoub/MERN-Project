@@ -65,6 +65,23 @@ module.exports.getAllUsers = (req, res) => {
     .catch(err => res.json(err))
 }
 
+module.exports.getAllResturents = (req, res) => {
+    User.find({})
+    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'resturent')))
+    .catch(err => res.json(err))
+}
+
+module.exports.getAllDeliveries = (req, res) => {
+    User.find({})
+    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'delivery')))
+    .catch(err => res.json(err))
+}
+module.exports.getAllCustomers = (req, res) => {
+    User.find({})
+    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'customer')))
+    .catch(err => res.json(err))
+}
+
 module.exports.createMenuItem = (req , res) => {
     const{name , price , description,picture , id } = req.body; 
     MenuItem.create({
