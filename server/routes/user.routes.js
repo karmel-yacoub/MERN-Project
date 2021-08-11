@@ -9,6 +9,7 @@ module.exports = (app) => {
     app.post('/register', upload.single('image'), LoginController.createUser);
     app.post('/login', passport.authenticate('local', {session:false}), LoginController.login);
     app.post('/logout', passport.authenticate('jwt', {session:false}), LoginController.logout);
+    app.get('/authenticated', passport.authenticate('jwt', {session:false}), LoginController.authenticate);
     app.post('/api/menuitem', upload.single('image'), UserController.createMenuItem);
     app.get ('/api/users/:id',UserController.getOneUser);
     app.put ('/api/users/:id',UserController.updateUser);
