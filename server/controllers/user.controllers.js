@@ -91,8 +91,8 @@ module.exports.createOrder = (req , res) => {
     })
     .then(
         order => {
-            order.customer = User.findOne({_id:customerId})
-            order.resturent = User.findOne({_id:resturentId}) 
+            order.customer = customerId
+            order.resturent = resturentId
             order.save()
             .then(order => res.json(order))   
         }

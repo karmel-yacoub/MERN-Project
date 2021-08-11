@@ -7,8 +7,8 @@ module.exports = (app) => {
     app.post('/login', passport.authenticate('local', {session:false}), UserController.login);
     app.post('/api/menuitem', upload.single('image'), UserController.createMenuItem);
     app.get ('/api/users/:id',UserController.getOneUser);
-    app.put('/api/users/:id',UserController.updateuser);
-    app.delete('/api/users/:id', UserController.deleteUser);
+    // app.put('/api/users/:id',UserController.updateUser);
+    // app.delete('/api/users/:id', UserController.deleteUser);
     app.post('/api/order',UserController.createOrder);
     
 

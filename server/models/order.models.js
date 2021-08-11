@@ -1,6 +1,8 @@
 const {UserSchema} = require('../models/user.models');
 
 const mongoose = require('mongoose');
+const {Schema} = require('mongoose');
+
 const OrderSchema = new mongoose.Schema({
 
     price:{
@@ -8,9 +10,9 @@ const OrderSchema = new mongoose.Schema({
         required:[true, "Price should be present"],
     },
 
-    customer:UserSchema,
-    delivery:UserSchema,
-    resturent:UserSchema,
+    customer:[{ type: Schema.Types.ObjectId, ref: 'User'}],
+    delivery:[{ type: Schema.Types.ObjectId, ref: 'User'}],
+    resturent:[{ type: Schema.Types.ObjectId, ref: 'User'}],
     status:{
         enum:['requested','accepted','readyToDeliver','inWay','delivered'],
     
