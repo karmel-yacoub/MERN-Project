@@ -10,6 +10,7 @@ module.exports = (app) => {
     app.put('/api/users/:id',UserController.updateuser);
     app.delete('/api/users/:id', UserController.deleteUser);
     app.post('/api/order',UserController.createOrder);
+    app.put ('/api/order/:id',UserController.deliveryOrderUpdate);
     
 
     // app.post('/login', localF, UserController.login);
