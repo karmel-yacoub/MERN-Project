@@ -1,4 +1,5 @@
 const {User} =require('../models/user.models')
+const {MenuItem}= require('../models/menuItem.models');
 // import menuitem model
 const passport = require('passport');
 const passportConfig = require('../passport');
@@ -51,9 +52,15 @@ module.exports.getOneUser = (req, res) => {
         .catch(err => res.json(err))
 }
 
+module.exports.getAllUsers = (req, res) => {
+    User.find({})
+    .then(user => res.json(user))
+    .catch(err => res.json(err))
+}
+
 module.exports.createMenuItem = (req , res) => {
     const{name , price , description,picture , id } = req.body; 
-    const item = await MenuItem.create({
+    MenuItem.create({
         name,
         price,
         description,
@@ -61,14 +68,16 @@ module.exports.createMenuItem = (req , res) => {
         //     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
         //     contentType: 'image/png'
         // }
-    });
+    })
+    .then(
+        item => {
+            User.findOne({_id:id})
+            .then(resturaunt => {
+            resturaunt.menu.push(item)
+            resturaunt.save()
+            .then(resturaunt => res.json(resturaunt))
+        })
+        }
+    )
 
-    // find resturant by id
-    const resturaunt =  User.findOne({_id:id})
-    .then(resturaunt => {
-                            resturaunt.menu.push(item)
-                            return resturaunt.save()
-                        })
-    .then(res => res.json(res))
-    .catch(err => res.json(err))
 }
