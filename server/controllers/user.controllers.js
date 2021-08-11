@@ -36,6 +36,12 @@ module.exports.createUser=(req,res) => {
     .catch(err => res.json(err));
 }
 
+module.exports.updateUser = (req, res) => {
+    User.findOneAndUpdate({_id: request.params.id}, req.body, {new:true , runValidators:true} )
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(400).json(err))
+}
+
 module.exports.login = (req, res) => {
     console.log("login....")
     console.log(req)

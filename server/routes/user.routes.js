@@ -10,6 +10,7 @@ module.exports = (app) => {
     app.post('/logout', passport.authenticate('jwt', {session:false}), LoginController.logout);
     app.post('/api/menuitem', upload.single('image'), UserController.createMenuItem);
     app.get ('/api/users/:id',UserController.getOneUser);
+    app.put ('/api/users/:id',UserController.updateUser);
     // app.put('/api/users/:id',UserController.updateUser);
     // app.delete('/api/users/:id', UserController.deleteUser);
     app.post('/api/order',UserController.createOrder);
