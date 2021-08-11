@@ -16,7 +16,7 @@ module.exports = (app) => {
     // app.delete('/api/users/:id', UserController.deleteUser);
     app.post('/api/order',UserController.createOrder);
     app.put ('/api/orders/:id',UserController.deliveryOrderUpdate);
-    app.get ('/api/orders/:id',OrderController.getOneOrder);
+
     
 
     // app.post('/login', localF, UserController.login);

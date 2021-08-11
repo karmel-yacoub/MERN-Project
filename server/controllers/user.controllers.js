@@ -83,10 +83,9 @@ module.exports.createMenuItem = (req , res) => {
             resturaunt.menu.push(item)
             resturaunt.save()
             .then(resturaunt => res.json(resturaunt))
-        })
+            })
         }
     )
-
 }
 
 module.exports.createOrder = (req , res) => {
@@ -98,15 +97,8 @@ module.exports.createOrder = (req , res) => {
     })
     .then(order => res.json(order))
     .catch(err => res.json(err))
-    // .then(
-    //     async order => {
-    //         order.customer = await User.findOne({_id:customerId})
-    //         order.resturent = await User.findOne({_id:resturentId})
-    //         order.save()
-    //         .then(order => res.json(order))   
-    //     }
-    // )
 }
+
 module.exports.deliveryOrderUpdate = async (req, res) => {
     const {delivery}= req.body
     Order.findOneAndUpdate({_id: req.params.id},{$set: {"delivery": delivery }} , {new:true , runValidators:true} )
@@ -122,3 +114,4 @@ module.exports.getOneUser = (req, res) => {
         .then(user => res.json(user))
         .catch(err => res.json(err))
 }
+
