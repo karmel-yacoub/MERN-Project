@@ -6,4 +6,5 @@ module.exports = (app) => {
     app.post('/register', upload.single('image'), UserController.createUser);
     app.post('/login', passport.authenticate('local', {session:false}), UserController.login);
     // app.post('/login', localF, UserController.login);
+    
 } 

@@ -1,4 +1,5 @@
 const {User} =require('../models/user.models')
+// import menuitem model
 const passport = require('passport');
 const passportConfig = require('../passport');
 const JWT = require('jsonwebtoken');
@@ -44,8 +45,14 @@ module.exports.login = (req, res) => {
     }
 }
 
-module.exports.addToMenu = (req , res) => {
-    const{name , price , description,picture } = req.body;
+module.exports.getOneUser = (req, res) => {
+    User.findOne({_id:req.params.id})
+        .then(user => res.json(user))
+        .catch(err => res.json(err))
+}
+
+module.exports.createMenuItem = (req , res) => {
+    const{name , price , description,picture , id } = req.body; 
     const item = await MenuItem.create({
         name,
         price,
@@ -55,7 +62,13 @@ module.exports.addToMenu = (req , res) => {
         //     contentType: 'image/png'
         // }
     });
-    // find resturant 
-    // add item to resturant's menu
 
+    // find resturant by id
+    const resturaunt =  User.findOne({_id:id})
+    .then(resturaunt => {
+                            resturaunt.menu.push(item)
+                            return resturaunt.save()
+                        })
+    .then(res => res.json(res))
+    .catch(err => res.json(err))
 }
