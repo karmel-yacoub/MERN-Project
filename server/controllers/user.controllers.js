@@ -90,26 +90,35 @@ module.exports.createMenuItem = (req , res) => {
 }
 
 module.exports.createOrder = (req , res) => {
-    const {price , customerId , resturentId } = req.body;
+    const {price , customer , resturent } = req.body;
     Order.create({
         price,
-        status:'requested'
+        customer,
+        resturent
     })
-    .then(
-        async order => {
-            order.customer = await User.findOne({_id:customerId}).name
-            order.resturent = await User.findOne({_id:resturentId}).name
-            order.save()
-            .then(order => res.json(order))   
-        }
-    )
+    .then(order => res.json(order))
+    .catch(err => res.json(err))
+    // .then(
+    //     async order => {
+    //         order.customer = await User.findOne({_id:customerId})
+    //         order.resturent = await User.findOne({_id:resturentId})
+    //         order.save()
+    //         .then(order => res.json(order))   
+    //     }
+    // )
 }
-module.exports.deliveryOrderUpdate = (request, response) => {
-    Order.findOneAndUpdate({_id: request.params.id}, deliveryId,  request.body, {new:true , runValidators:true} )
+module.exports.deliveryOrderUpdate = async (req, res) => {
+    const {delivery}= req.body
+    Order.findOneAndUpdate({_id: req.params.id},{$set: {"delivery": delivery }} , {new:true , runValidators:true} )
         .then(
-            async updatedAuthor => {
-                order.delivery = await User.findOne({_id:deliveryId})
-                order.status = 'inWay'
+            order =>{ Order.findOneAndUpdate({_id: req.params.id},{status:'inWay'} , {new:true , runValidators:true} )
+            .then(order => res.json(order))
             })
         .catch(err => response.status(400).json(err))
+}
+
+module.exports.getOneUser = (req, res) => {
+    User.findOne({_id:req.params.id})
+        .then(user => res.json(user))
+        .catch(err => res.json(err))
 }

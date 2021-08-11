@@ -1,5 +1,6 @@
 const UserController = require('../controllers/user.controllers')
 const LoginController = require('../controllers/login.controllers')
+const OrderController = require('../controllers/order.controllers')
 const upload = require('../multer')
 const passport = require('passport');
 
@@ -14,7 +15,8 @@ module.exports = (app) => {
     // app.put('/api/users/:id',UserController.updateUser);
     // app.delete('/api/users/:id', UserController.deleteUser);
     app.post('/api/order',UserController.createOrder);
-    app.put ('/api/order/:id',UserController.deliveryOrderUpdate);
+    app.put ('/api/orders/:id',UserController.deliveryOrderUpdate);
+    app.get ('/api/orders/:id',OrderController.getOneOrder);
     
 
     // app.post('/login', localF, UserController.login);

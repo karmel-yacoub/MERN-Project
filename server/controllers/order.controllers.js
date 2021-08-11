@@ -7,3 +7,9 @@ module.exports.findAllOrders = (request,response)=>{
     .catch(err => response.json(err))
  
 }
+
+module.exports.getOneOrder = (req, res) => {
+    Order.findOne({_id:req.params.id}).populate('customer').populate('resturent').populate('delivery')
+        .then(user => res.json(user))
+        .catch(err => res.json(err))
+}
