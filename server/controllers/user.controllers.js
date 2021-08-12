@@ -126,9 +126,4 @@ module.exports.deliveryOrderUpdate = async (req, res) => {
         .catch(err => response.status(400).json(err))
 }
 
-module.exports.getOneUser = (req, res) => {
-    User.findOne({_id:req.params.id})
-        .then(user => res.json(user))
-        .catch(err => res.json(err))
-}
 
