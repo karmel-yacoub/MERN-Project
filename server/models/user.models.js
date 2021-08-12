@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 
 require('mongoose-type-email');
 var uniqueValidator = require('mongoose-unique-validator');
+const { OrderSchema } = require('./order.models');
 const UserSchema = new mongoose.Schema({
     name: { 
             type: String,
@@ -43,7 +44,8 @@ const UserSchema = new mongoose.Schema({
         data:Buffer,
         contentType:String,
     },
-    menu:[MenuItemSchema]
+    menu:[MenuItemSchema],
+    orders:[OrderSchema]
 }, { timestamps: true });
 
 UserSchema.pre('save', function(next) {

@@ -35,7 +35,6 @@ module.exports.createUser=(req,res) => {
 
 module.exports.login = (req, res) => {
     console.log("login....")
-    console.log(req)
     if(req.isAuthenticated()) {
         const {_id, name, genre} = req.user;
         const token = signToken(_id);
@@ -46,11 +45,12 @@ module.exports.login = (req, res) => {
 
 module.exports.logout = (req, res) => {
     console.log("logout....")
-    // console.log(req)
-    if(req.isAuthenticated()) {
-        const {_id, name, genre} = req.user;
-        const token = signToken(_id);
-        res.cookie('access_token', token, {httpOnly: true, sameSite: true});
-        res.status(200).json({isAuthenticated: true, user: {name, genre, _id}});
-    }
+    res.clearCookie('access_token')
+    res.json({ user:{name:"", genre:""}, success: true})
+}
+
+module.exports.authenticate = (req, res) => {
+    console.log("authenticate....")
+    const {name, genre} = req.user;
+    res.status(200).json({isAuthenticated:true, user:{name, genre}})
 }

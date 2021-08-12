@@ -36,6 +36,12 @@ module.exports.createUser=(req,res) => {
     .catch(err => res.json(err));
 }
 
+module.exports.updateUser = (req, res) => {
+    User.findOneAndUpdate({_id: request.params.id}, req.body, {new:true , runValidators:true} )
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(400).json(err))
+}
+
 module.exports.login = (req, res) => {
     console.log("login....")
     console.log(req)
@@ -59,6 +65,23 @@ module.exports.getAllUsers = (req, res) => {
     .catch(err => res.json(err))
 }
 
+module.exports.getAllResturents = (req, res) => {
+    User.find({})
+    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'resturent')))
+    .catch(err => res.json(err))
+}
+
+module.exports.getAllDeliveries = (req, res) => {
+    User.find({})
+    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'delivery')))
+    .catch(err => res.json(err))
+}
+module.exports.getAllCustomers = (req, res) => {
+    User.find({})
+    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'customer')))
+    .catch(err => res.json(err))
+}
+
 module.exports.createMenuItem = (req , res) => {
     const{name , price , description,picture , id } = req.body; 
     MenuItem.create({
@@ -77,25 +100,30 @@ module.exports.createMenuItem = (req , res) => {
             resturaunt.menu.push(item)
             resturaunt.save()
             .then(resturaunt => res.json(resturaunt))
-        })
+            })
         }
     )
-
 }
 
 module.exports.createOrder = (req , res) => {
-    const {price , customerId , resturentId , deliveryId} = req.body;
+    const {price , customer , resturent } = req.body;
     Order.create({
         price,
-        status:'requested'
+        customer,
+        resturent
     })
-    .then(
-        order => {
-            order.customer = customerId
-            order.resturent = resturentId
-            order.save()
-            .then(order => res.json(order))   
-        }
-    )
+    .then(order => res.json(order))
+    .catch(err => res.json(err))
 }
+
+module.exports.deliveryOrderUpdate = async (req, res) => {
+    const {delivery}= req.body
+    Order.findOneAndUpdate({_id: req.params.id},{$set: {"delivery": delivery }} , {new:true , runValidators:true} )
+        .then(
+            order =>{ Order.findOneAndUpdate({_id: req.params.id},{status:'inWay'} , {new:true , runValidators:true} )
+            .then(order => res.json(order))
+            })
+        .catch(err => response.status(400).json(err))
+}
+
 
