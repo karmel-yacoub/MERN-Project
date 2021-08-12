@@ -2,8 +2,17 @@ import axios from 'axios';
 
 export default {
     login: user => {
-        return axios.post("/login", user)
-        .then(res => res.data)
+        return axios.post("http://localhost:8000/login", user)
+        .then(res => {
+            console.log(res);
+            res.message = "ok";
+            return res;
+        })
+        .catch(res => {
+            console.log(res);
+            // res.message = "Not"
+            return res;
+        })
     },
     register: user => {
         return axios.post("/register", user)
