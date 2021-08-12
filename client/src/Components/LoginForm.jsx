@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -14,14 +14,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import AuthService from '../Services/AuthService';
 import AuthContext from '../Context/AuthContext';
+import {Link} from '@reach/router'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <a color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{' '}
+      </a>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("mnzxd ms");
+    const [message, setMessage] = useState("");
     const classes = useStyles();
     const authContext = useContext(AuthContext);
     // const {user, setUser, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
@@ -80,6 +81,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar> */}
         <Typography component="h1" variant="h5">
+        
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={signIn}>
@@ -124,19 +126,19 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link to="" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link to="/registration" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
           <p>{name}</p>
           <p>{password}</p>
-          <p>{message}</p>
+          
         </form>
       </div>
       <Box mt={8}>

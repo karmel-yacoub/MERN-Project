@@ -9,7 +9,7 @@ module.exports.findAllOrders = (request,response)=>{
 }
 
 module.exports.getOneOrder = (req, res) => {
-    Order.findOne({_id:req.params.id}).populate('customer').populate('resturent').populate('delivery')
+    Order.findOne({_id:req.params.id}).populate('customer').populate('restaurant').populate('delivery')
         .then(user => res.json(user))
         .catch(err => res.json(err))
 }
@@ -21,9 +21,9 @@ module.exports.findUserOrders = (req, res) => {
         .catch(err => res.json(err))
 }
 
-module.exports.findResturentOrders = (req, res) => {
+module.exports.findrestaurantOrders = (req, res) => {
     Order.find({})
-        .then(orders => res.json(orders.filter((item , idx)=>item.resturent == req.params.id)))
+        .then(orders => res.json(orders.filter((item , idx)=>item.restaurant == req.params.id)))
         .catch(err => res.json(err))
 }
 

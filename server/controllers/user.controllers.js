@@ -65,20 +65,20 @@ module.exports.getAllUsers = (req, res) => {
     .catch(err => res.json(err))
 }
 
-module.exports.getAllResturents = (req, res) => {
+module.exports.getAllrestaurants = (req, res) => {
     User.find({})
-    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'resturent')))
+    .then(restaurants => res.json(restaurants.filter((item)=>item.genre == 'restaurant')))
     .catch(err => res.json(err))
 }
 
 module.exports.getAllDeliveries = (req, res) => {
     User.find({})
-    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'delivery')))
+    .then(restaurants => res.json(restaurants.filter((item)=>item.genre == 'delivery')))
     .catch(err => res.json(err))
 }
 module.exports.getAllCustomers = (req, res) => {
     User.find({})
-    .then(resturents => res.json(resturents.filter((item)=>item.genre == 'customer')))
+    .then(restaurants => res.json(restaurants.filter((item)=>item.genre == 'customer')))
     .catch(err => res.json(err))
 }
 
@@ -106,11 +106,11 @@ module.exports.createMenuItem = (req , res) => {
 }
 
 module.exports.createOrder = (req , res) => {
-    const {price , customer , resturent } = req.body;
+    const {price , customer , restaurant } = req.body;
     Order.create({
         price,
         customer,
-        resturent
+        restaurant
     })
     .then(order => res.json(order))
     .catch(err => res.json(err))
