@@ -88,6 +88,9 @@ export default function Album() {
           <Typography variant="h6" color="inherit" noWrap>
             Food is here
           </Typography>
+          <Typography color="inherit" noWrap>
+            <Link to="/login" >Login</Link>
+          </Typography>
         </Toolbar>
       </AppBar>
       <main>

@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import {Link} from '@reach/router';
 import AuthService from '../Services/AuthService';
 import AuthContext from '../Context/AuthContext';
+import {navigate} from '@reach/router'
 
 function Copyright() {
 
@@ -80,6 +81,7 @@ export default function SignUp() {
         else {
             setMessage(message);
         }
+        navigate('/')
     });
 };
 

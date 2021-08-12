@@ -7,6 +7,7 @@ import {Router} from '@reach/router';
 import Login from './Components/LoginForm';
 import RegistrationForm from './Components/RegistrationForm'
 import LandingPage from './Components/LandingPage'
+import UserPage from './Components/UserPage';
 
 function App() {
   const {user, setUser, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
@@ -18,7 +19,8 @@ function App() {
       <Router>
         <Login path="/login" />
         <RegistrationForm path="/registration" />
-        <LandingPage path='/' />
+        <LandingPage path='/'/>
+        <UserPage path='/users/:id'/>
       </Router>
     </div>
   );
