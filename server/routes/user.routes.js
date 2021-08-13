@@ -12,6 +12,7 @@ module.exports = (app) => {
     app.get('/authenticated', passport.authenticate('jwt', {session:false}), LoginController.authenticate);
     app.post('/api/menuitem', upload.single('image'), UserController.createMenuItem);
     app.get ('/api/users/:id',UserController.getOneUser);
+    app.get ('/api/users',UserController.getAllUsers);
     app.put ('/api/users/:id',UserController.updateUser);
     app.get ('/api/customers',UserController.getAllCustomers);
     app.get ('/api/restaurants',UserController.getAllrestaurants);

@@ -8,6 +8,9 @@ import Login from './Components/LoginForm';
 import RegistrationForm from './Components/RegistrationForm'
 import LandingPage from './Components/LandingPage'
 import UserPage from './Components/UserPage';
+import Home from './Components/Home';
+import Restaurant from './Components/Restaurant';
+import PrivateComponent from './HOCs/PrivateComponent';
 
 function App() {
   const {user, setUser, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
@@ -17,10 +20,13 @@ function App() {
     <div className="App">
       {/* <p>Hello</p> */}
       <Router>
+        <Home path="/home" />
+        {/* <Restaurant path="/restaurants" /> */}
         <Login path="/login" />
         <RegistrationForm path="/registration" />
         <LandingPage path='/'/>
         <UserPage path='/users/:id'/>
+        <PrivateComponent Component={Restaurant} path="restaurants" />
       </Router>
     </div>
   );

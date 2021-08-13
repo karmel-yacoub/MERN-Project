@@ -5,7 +5,11 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 
 require('./config/mongoose.config');
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: ['http://localhost:3000']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
