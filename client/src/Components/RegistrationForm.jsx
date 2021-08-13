@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Link} from '@reach/router';
 import AuthService from '../Services/AuthService';
-import AuthContext from '../Context/AuthContext';
+import {AuthContext} from '../Context/AuthContext';
 import {navigate} from '@reach/router'
 
 function Copyright() {
@@ -72,17 +72,12 @@ export default function SignUp() {
     e.preventDefault();
     AuthService.register({name,email,password,phone,location,genre})
     .then(data => {
-        console.log(data)
-        const {isAuthenticated, user, message} = data;
-        if (isAuthenticated) {
-            authContext.setUser(user);
-            authContext.setIsAuthenticated(isAuthenticated);
+        if(!data.errors) {
+        // console.log(data);
+        navigate("/login")
         }
-        else {
-            setMessage(message);
-        }
-        navigate('/')
-    });
+    })
+    .catch(err => console.log(err))
 };
 
 const confPass = (e) => {

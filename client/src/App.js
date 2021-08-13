@@ -33,9 +33,9 @@ function App() {
         <UserPage path='/users/:id'/>
         <OrdersTable path='/order'/>
         {/* <UserPage path='/users/:id'/> */}
-        {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="restaurants" /> */}
-        <UnPrivateComponent Component={Delivery} path="deliveries" />
-        <UnPrivateComponent Component={Customer} path="customers" />
+        {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="/restaurants" /> */}
+        <UnPrivateComponent Component={Delivery} path="/deliveries" />
+        <UnPrivateComponent Component={Customer} path="/customers" />
       </Router>
     </div>
   );

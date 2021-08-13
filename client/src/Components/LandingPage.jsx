@@ -1,4 +1,4 @@
-import React, {useEffect , useState} from 'react';
+import React, {useEffect , useState, useContext} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Link} from '@reach/router'
 import axios from 'axios';
+import Navbar from './Navbar';
+import {AuthContext} from '../Context/AuthContext';
 
 
 
@@ -65,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Album() {
+  const {user, setUser, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
   const classes = useStyles();
   const [restaurants , setRestaurants] = useState([])
   const [loaded , setLoaded] = useState(false)
@@ -81,15 +84,13 @@ export default function Album() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          {/* <CameraIcon className={classes.icon} /> */}
-          <Typography variant="h6" color="inherit" noWrap>
-            Food is here
-            <Link to="/login" >Login</Link>
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      {
+        isAuthenticated ?
+        <Navbar position="relative" title="Food is here" link1="Logout" ref1="/logout" link2="" ref2="" />
+        :
+        <Navbar position="relative" title="Food is here" link1="Login" ref1="/login" link2="Register" ref2="/registration" />
+      }
+      
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
