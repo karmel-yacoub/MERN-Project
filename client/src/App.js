@@ -30,15 +30,12 @@ function App() {
         <Login path="/login" />
         <RegistrationForm path="/registration" />
         <LandingPage path='/'/>
-<<<<<<< HEAD
         <UserPage path='/users/:id'/>
         <OrdersTable path='/order'/>
-=======
         {/* <UserPage path='/users/:id'/> */}
         {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="restaurants" /> */}
         <UnPrivateComponent Component={Delivery} path="deliveries" />
         <UnPrivateComponent Component={Customer} path="customers" />
->>>>>>> dc8e6c8a970217e9ede6af2b25a2dfe2ef15817c
       </Router>
     </div>
   );
