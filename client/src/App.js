@@ -16,6 +16,7 @@ import UnPrivateComponent from './HOCs/UnPrivateComponent';
 import Customer from './Components/Customer';
 import Delivery from './Components/Delivery';
 import RelativeViews from './Components/RelativeViews';
+import Navbar from './Components/Navbar';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   console.log(isAuthenticated);
   return (
     <div className="App">
+       <Navbar position="relative" title="Food is here" link1="Login" ref1="/login" link2="Register" ref2="/registration" />
       <Router>
         <Home path="/home" />
         {/* <Restaurant path="/restaurants" /> */}
