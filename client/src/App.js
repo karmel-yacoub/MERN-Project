@@ -24,7 +24,6 @@ function App() {
   console.log(isAuthenticated);
   return (
     <div className="App">
-      {/* <p>Hello</p> */}
       <Router>
         <Home path="/home" />
         {/* <Restaurant path="/restaurants" /> */}
@@ -33,12 +32,10 @@ function App() {
         <LandingPage path='/'/>
         <UserPage path='/users/:id'/>
         <OrdersTable path='/order'/>
-
         {/* <UserPage path='/users/:id'/> */}
-        <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="restaurants" />
+        {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="restaurants" /> */}
         <UnPrivateComponent Component={Delivery} path="deliveries" />
         <UnPrivateComponent Component={Customer} path="customers" />
-
       </Router>
     </div>
   );

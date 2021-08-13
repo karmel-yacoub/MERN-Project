@@ -5,7 +5,7 @@ export default {
         return axios.post("http://localhost:8000/login", user)
         .then(res => {
             console.log(res);
-            res.message = "ok";
+            res.message = "Login Successfully";
             return res;
         })
         .catch(res => {
