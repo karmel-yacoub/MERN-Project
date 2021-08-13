@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
     },
     genre:{
         type:String,
-        enum:['customer','resturent','delivery'],
+        enum:['customer','restaurant','delivery'],
         defult:'customer',
         required:true,
     },

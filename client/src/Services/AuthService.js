@@ -15,8 +15,15 @@ export default {
         })
     },
     register: user => {
-        return axios.post("/register", user)
-        .then(res => res.data)
+        return axios.post("http://localhost:8000/register", user)
+        .then(res => {
+            // console.log(res.data)
+            return res.data
+        })
+        .catch(res => {
+            // console.log(res.data)
+            return res.data.errors
+        })
     },
     logout: () => {
         return axios.post("/logout")

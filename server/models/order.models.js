@@ -16,7 +16,7 @@ const OrderSchema = new mongoose.Schema({
     },
 
     customer:{ type: Schema.Types.ObjectId, ref: 'User'},
-    resturent:{ type: Schema.Types.ObjectId, ref: 'User'},
+    restaurant:{ type: Schema.Types.ObjectId, ref: 'User'},
     delivery:{ type: Schema.Types.ObjectId, ref: 'User'},
     
     
