@@ -1,4 +1,4 @@
-import React, {useEffect , useState} from 'react';
+import React, {useEffect , useState, useContext} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Link} from '@reach/router'
 import axios from 'axios';
+import Navbar from './Navbar';
+import {AuthContext} from '../Context/AuthContext';
 
 
 
@@ -63,9 +65,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
+  const {user, setUser, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
   const classes = useStyles();
   const [restaurants , setRestaurants] = useState([])
   const [loaded , setLoaded] = useState(false)
@@ -81,46 +83,8 @@ export default function Album() {
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          {/* <CameraIcon className={classes.icon} /> */}
-          <Typography variant="h6" color="inherit" noWrap>
-            Food is here
-          </Typography>
-          <Typography color="inherit" noWrap>
-            <Link to="/login" >Login</Link>
-          </Typography>
-        </Toolbar>
-      </AppBar>
+         
       <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
-          {/* <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Album layout
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Something short and leading about the collection below—its contents, the creator, etc.
-              Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-              entirely.
-            </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Container> */}
-        </div>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <h2>Restaurants</h2>
@@ -155,10 +119,10 @@ export default function Album() {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Food is here
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          Mern Project - 2021
         </Typography>
         <Copyright />
       </footer>

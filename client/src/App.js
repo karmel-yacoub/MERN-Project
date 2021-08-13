@@ -16,7 +16,11 @@ import UnPrivateComponent from './HOCs/UnPrivateComponent';
 import Customer from './Components/Customer';
 import Delivery from './Components/Delivery';
 import RelativeViews from './Components/RelativeViews';
+<<<<<<< HEAD
 import Profile from './Components/Profile';
+=======
+import Navbar from './Components/Navbar';
+>>>>>>> c20b2808beb427ec6e3d90cbea15836fd57669d5
 
 
 function App() {
@@ -25,13 +29,14 @@ function App() {
   console.log(isAuthenticated);
   return (
     <div className="App">
-      {/* <p>Hello</p> */}
+       <Navbar position="relative" title="Food is here" link1="Login" ref1="/login" link2="Register" ref2="/registration" />
       <Router>
         <Home path="/home" />
         {/* <Restaurant path="/restaurants" /> */}
         <Login path="/login" />
         <RegistrationForm path="/registration" />
         <LandingPage path='/'/>
+<<<<<<< HEAD
 
         <UserPage path='/users/:id'/>
         <OrdersTable path='/order'/>
@@ -42,6 +47,14 @@ function App() {
         {/* <UnPrivateComponent Component={Delivery} path="deliveries" /> */}
         {/* <UnPrivateComponent Component={Customer} path="customers" /> */}
 
+=======
+        <UserPage path='/users/:id'/>
+        <OrdersTable path='/order'/>
+        {/* <UserPage path='/users/:id'/> */}
+        {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="/restaurants" /> */}
+        <UnPrivateComponent Component={Delivery} path="/deliveries" />
+        <UnPrivateComponent Component={Customer} path="/customers" />
+>>>>>>> c20b2808beb427ec6e3d90cbea15836fd57669d5
       </Router>
     </div>
   );

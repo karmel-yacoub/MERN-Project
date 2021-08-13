@@ -13,8 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import AuthService from '../Services/AuthService';
-import AuthContext from '../Context/AuthContext';
-import {Link} from '@reach/router'
+import {AuthContext} from '../Context/AuthContext';
+import {Link, navigate} from '@reach/router'
 
 function Copyright() {
   return (
@@ -61,13 +61,15 @@ export default function SignIn() {
         e.preventDefault();
         AuthService.login({name, password})
         .then(data => {
-            // console.log(data)
-            const {isAuthenticated, user, message} = data;
-            if (isAuthenticated) {
-                authContext.setUser(user);
-                authContext.setIsAuthenticated(isAuthenticated);
+            console.log("form",data)
+            console.log("form",data.user)
+            if (data.isAuthenticated) {
+                authContext.setUser(data.user);
+                authContext.setIsAuthenticated(data.isAuthenticated);
+                setTimeout(() => navigate("/"), 3000);
             }
             else {
+              setTimeout(function(){ alert("Hello"); }, 3000);
                 setMessage(message);
             }
         });
@@ -136,9 +138,6 @@ export default function SignIn() {
               </Link>
             </Grid>
           </Grid>
-          <p>{name}</p>
-          <p>{password}</p>
-          <p>{message}</p>
         </form>
       </div>
       <Box mt={8}>
