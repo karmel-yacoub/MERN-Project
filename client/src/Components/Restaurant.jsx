@@ -1,9 +1,13 @@
-import React from 'react'
+import { Redirect } from '@reach/router';
+import React,{useContext} from 'react';
+import {AuthContext} from '../Context/AuthContext';
+import RelativeViews from './RelativeViews';
 
 const Restaurant = () => {
+    const {user} = useContext(AuthContext);
     return (
         <div>
-            <h1>Restaurant</h1>
+            <RelativeViews ForRestView={} ForCustomerView={} ForDeliveryView={} />
         </div>
     )
 }

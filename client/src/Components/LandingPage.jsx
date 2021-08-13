@@ -125,17 +125,17 @@ export default function Album() {
           {/* End hero unit */}
           <h2>Restaurants</h2>
           <Grid container spacing={4}>
-            {loaded && restaurants.map((resturent , idx) => (
+            {loaded && restaurants.map((restaurant , idx) => (
               <Grid item key={idx} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
                     image="https://source.unsplash.com/random"
-                    title={resturent.name}
+                    title={restaurant.name}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                    {resturent.name}
+                    {restaurant.name}
                     </Typography>
                     <Typography>
                       This is a media card. You can use this section to describe the content.
@@ -143,7 +143,7 @@ export default function Album() {
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
-                      <Link to={'users/' + resturent._id}>View</Link>
+                      <Link to={'restaurants/' + restaurant._id}>View</Link>
                     </Button>
                   </CardActions>
                 </Card>
