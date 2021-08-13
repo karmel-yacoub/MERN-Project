@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import AuthProvider from './Context/AuthContext'
+import axios from 'axios';
 // import reportWebVitals from './reportWebVitals';
+axios.defaults.withCredentials = true;
+
 
 ReactDOM.render(
 

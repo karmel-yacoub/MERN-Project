@@ -61,7 +61,7 @@ export default function SignIn() {
         e.preventDefault();
         AuthService.login({name, password})
         .then(data => {
-            console.log(data)
+            // console.log(data)
             const {isAuthenticated, user, message} = data;
             if (isAuthenticated) {
                 authContext.setUser(user);
@@ -138,7 +138,7 @@ export default function SignIn() {
           </Grid>
           <p>{name}</p>
           <p>{password}</p>
-          
+          <p>{message}</p>
         </form>
       </div>
       <Box mt={8}>
