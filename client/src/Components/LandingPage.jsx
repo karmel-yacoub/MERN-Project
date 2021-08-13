@@ -63,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
   const classes = useStyles();
@@ -87,8 +86,6 @@ export default function Album() {
           {/* <CameraIcon className={classes.icon} /> */}
           <Typography variant="h6" color="inherit" noWrap>
             Food is here
-          </Typography>
-          <Typography color="inherit" noWrap>
             <Link to="/login" >Login</Link>
           </Typography>
         </Toolbar>
