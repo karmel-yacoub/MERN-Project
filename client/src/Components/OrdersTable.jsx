@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
+import axios from 'axios';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -6,7 +7,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
+
+// import Title from './Title';
 
 // Generate Order Data
 // function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -31,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders() {
+export default function OrdersTable() {
   const classes = useStyles();
-  const [Orders , setOrders] = useState([])
+  const [orders , setOrders] = useState([])
   const [loaded , setLoaded] = useState(false)
     useEffect (() => {
       axios.get("http://localhost:8000/api/orders")
@@ -47,7 +49,7 @@ export default function Orders() {
   
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
+      <h1>Recent Orders</h1>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -57,17 +59,17 @@ export default function Orders() {
             <TableCell>Date</TableCell>
             <TableCell>Delivary</TableCell>
             <TableCell>Status</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Sale Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        {loaded && restaurants.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+        {loaded && orders.map((order , idx) => (
+            <TableRow key={idx}>
+              <TableCell>{order.restaurant}</TableCell>
+              <TableCell>{order.customer}</TableCell>
+              <TableCell>{order.price}</TableCell>
+              <TableCell>{order.date}</TableCell>
+              <TableCell>{order.amount}</TableCell>
             </TableRow>
           ))}
         </TableBody>

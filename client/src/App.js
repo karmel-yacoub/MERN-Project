@@ -8,6 +8,7 @@ import Login from './Components/LoginForm';
 import RegistrationForm from './Components/RegistrationForm';
 import LandingPage from './Components/LandingPage';
 import UserPage from './Components/UserPage';
+import OrdersTable from './Components/OrdersTable';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <RegistrationForm path="/registration" />
         <LandingPage path='/'/>
         <UserPage path='/users/:id'/>
+        <OrdersTable path='/order'/>
       </Router>
     </div>
   );
