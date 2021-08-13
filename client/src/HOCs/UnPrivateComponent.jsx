@@ -8,11 +8,11 @@ const UnPrivateComponent = ({Component, roles, ForRestView, ForCustomerView, For
 
     return (
         <div>
-            {
+            {/* {
                 isAuthenticated ?
                 <Component ForRestView={} ForCustomerView={} ForDeliveryView={}/>:
                 <Redirect to="/login" noThrow />
-            }
+            } */}
             
         </div>
     )

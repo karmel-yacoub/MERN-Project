@@ -16,6 +16,7 @@ import UnPrivateComponent from './HOCs/UnPrivateComponent';
 import Customer from './Components/Customer';
 import Delivery from './Components/Delivery';
 import RelativeViews from './Components/RelativeViews';
+import Profile from './Components/Profile';
 
 
 function App() {
@@ -34,11 +35,12 @@ function App() {
 
         <UserPage path='/users/:id'/>
         <OrdersTable path='/order'/>
+        <Profile path ='/profile' />
 
         {/* <UserPage path='/users/:id'/> */}
-        <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="restaurants" />
-        <UnPrivateComponent Component={Delivery} path="deliveries" />
-        <UnPrivateComponent Component={Customer} path="customers" />
+        {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="restaurants" /> */}
+        {/* <UnPrivateComponent Component={Delivery} path="deliveries" /> */}
+        {/* <UnPrivateComponent Component={Customer} path="customers" /> */}
 
       </Router>
     </div>
