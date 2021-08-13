@@ -7,7 +7,7 @@ const Restaurant = () => {
     const {user} = useContext(AuthContext);
     return (
         <div>
-            <RelativeViews ForRestView={} ForCustomerView={} ForDeliveryView={} />
+            {/* <RelativeViews ForRestView={} ForCustomerView={} ForDeliveryView={} /> */}
         </div>
     )
 }

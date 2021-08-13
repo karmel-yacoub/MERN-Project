@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import AuthService from '../Services/AuthService';
 import AuthContext from '../Context/AuthContext';
-import {Link} from '@reach/router'
+import {Link, navigate} from '@reach/router'
 
 function Copyright() {
   return (
@@ -66,8 +66,10 @@ export default function SignIn() {
             if (isAuthenticated) {
                 authContext.setUser(user);
                 authContext.setIsAuthenticated(isAuthenticated);
+                setTimeout(function(){ alert("sdsd"); }, 3000);
             }
             else {
+              setTimeout(function(){ alert("Hello"); }, 3000);
                 setMessage(message);
             }
         });
