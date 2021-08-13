@@ -30,7 +30,10 @@ module.exports.createUser=(req,res) => {
         menu,
     })
     .then(newUser => res.json(newUser))
-    .catch(err => res.json(err));
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    });
 }
 
 module.exports.login = (req, res) => {
@@ -50,7 +53,7 @@ module.exports.logout = (req, res) => {
 }
 
 module.exports.authenticate = (req, res) => {
-    console.log("authenticate....")
+    // console.log("authenticate....")
     const {name, genre} = req.user;
     res.status(200).json({isAuthenticated:true, user:{name, genre}})
 }
