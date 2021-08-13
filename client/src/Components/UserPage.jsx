@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React , {useState , useEffect} from 'react'
 
+
+
 const UserPage = (props) => {
     const {id} = props
     const [user , setUser] = useState({})
@@ -16,6 +18,7 @@ const UserPage = (props) => {
     return (
         <div>
             {loaded && user.name}
+         
         </div>
     )
 }
