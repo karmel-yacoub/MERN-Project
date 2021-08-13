@@ -16,11 +16,9 @@ import UnPrivateComponent from './HOCs/UnPrivateComponent';
 import Customer from './Components/Customer';
 import Delivery from './Components/Delivery';
 import RelativeViews from './Components/RelativeViews';
-<<<<<<< HEAD
 import Profile from './Components/Profile';
-=======
 import Navbar from './Components/Navbar';
->>>>>>> c20b2808beb427ec6e3d90cbea15836fd57669d5
+
 
 
 function App() {
@@ -36,7 +34,6 @@ function App() {
         <Login path="/login" />
         <RegistrationForm path="/registration" />
         <LandingPage path='/'/>
-<<<<<<< HEAD
 
         <UserPage path='/users/:id'/>
         <OrdersTable path='/order'/>
@@ -47,14 +44,13 @@ function App() {
         {/* <UnPrivateComponent Component={Delivery} path="deliveries" /> */}
         {/* <UnPrivateComponent Component={Customer} path="customers" /> */}
 
-=======
         <UserPage path='/users/:id'/>
         <OrdersTable path='/order'/>
         {/* <UserPage path='/users/:id'/> */}
         {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="/restaurants" /> */}
         <UnPrivateComponent Component={Delivery} path="/deliveries" />
         <UnPrivateComponent Component={Customer} path="/customers" />
->>>>>>> c20b2808beb427ec6e3d90cbea15836fd57669d5
+
       </Router>
     </div>
   );
