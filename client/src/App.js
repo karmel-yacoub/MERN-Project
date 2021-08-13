@@ -17,6 +17,7 @@ import Customer from './Components/Customer';
 import Delivery from './Components/Delivery';
 import RelativeViews from './Components/RelativeViews';
 import Navbar from './Components/Navbar';
+import CreateMeal from './Components/CreateMeal';
 
 
 function App() {
@@ -35,9 +36,10 @@ function App() {
         <UserPage path='/users/:id'/>
         <OrdersTable path='/order'/>
         {/* <UserPage path='/users/:id'/> */}
-        {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="/restaurants" /> */}
+        {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="/restaurants/:id" /> */}
         <UnPrivateComponent Component={Delivery} path="/deliveries" />
         <UnPrivateComponent Component={Customer} path="/customers" />
+        <CreateMeal path='/meal' />
       </Router>
     </div>
   );

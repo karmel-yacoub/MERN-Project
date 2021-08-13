@@ -15,7 +15,8 @@ var fs = require('fs');
 var path = require('path');
 
 module.exports.createUser=(req,res) => {
-    const{name , email , password ,phone , location, genre , picture , menu} = req.body;
+    const url = req.protocol + "://" + req.get("host");
+    const{name , email , password ,phone , location, genre , menu} = req.body;
     User.create({
         name,
         email,
@@ -23,10 +24,7 @@ module.exports.createUser=(req,res) => {
         phone,
         location,
         genre,
-        // picture :{
-        //     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-        //     contentType: 'image/png'
-        // },
+        picture : url + "/images/" + req.file.filename,
         menu,
     })
     .then(newUser => res.json(newUser))

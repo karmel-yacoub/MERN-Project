@@ -17,24 +17,6 @@ const signToken = userID => {
 var fs = require('fs');
 var path = require('path');
 
-module.exports.createUser=(req,res) => {
-    const{name , email , password ,phone , location, genre , picture , menu} = req.body;
-    User.create({
-        name,
-        email,
-        password,
-        phone,
-        location,
-        genre,
-        // picture :{
-        //     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-        //     contentType: 'image/png'
-        // },
-        menu,
-    })
-    .then(newUser => res.json(newUser))
-    .catch(err => res.json(err));
-}
 
 module.exports.updateUser = (req, res) => {
     User.findOneAndUpdate({_id: request.params.id}, req.body, {new:true , runValidators:true} )
@@ -83,26 +65,30 @@ module.exports.getAllCustomers = (req, res) => {
 }
 
 module.exports.createMenuItem = (req , res) => {
-    const{name , price , description,picture , id } = req.body; 
+    const {_id} = req.user;
+    const{name , price , description} = req.body; 
+    const url = req.protocol + "://" + req.get("host");
     MenuItem.create({
         name,
         price,
         description,
-        // picture :{
-        //     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-        //     contentType: 'image/png'
-        // }
+        picture : url + "/images/" + req.file.filename
     })
     .then(
         item => {
-            User.findOne({_id:id})
-            .then(resturaunt => {
-            resturaunt.menu.push(item)
-            resturaunt.save()
-            .then(resturaunt => res.json(resturaunt))
+            User.findOne({_id})
+            .then(restaurant => {
+            restaurant.menu.push(item)
+            restaurant.save()
+            .then(restaurant => res.json(restaurant))
+            .catch((err) => {
+                console.log(err)
             })
-        }
-    )
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        })
 }
 
 module.exports.createOrder = (req , res) => {

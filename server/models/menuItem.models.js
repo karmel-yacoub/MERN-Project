@@ -15,8 +15,8 @@ const MenuItemSchema = new mongoose.Schema({
         required:[true, "Description should be present"],
     },
     picture:{
-        data:Buffer,
-        contentType:String,
+        type:String,
+        required: true
     },
 
  } , {timestamps: true})

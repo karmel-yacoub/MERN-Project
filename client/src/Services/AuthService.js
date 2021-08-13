@@ -25,7 +25,7 @@ export default {
         })
     },
     logout: () => {
-        return axios.post("/logout")
+        return axios.post("http://localhost:8000/logout")
         .then(res => res.data)
     },
     isAuthenticated: () => {

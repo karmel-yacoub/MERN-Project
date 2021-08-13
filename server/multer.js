@@ -1,15 +1,27 @@
-// Step 5 - set up multer for storing uploaded files
+const multer = require('multer'); 
 
-var multer = require('multer');
-
-var storage = multer.diskStorage({
+const MIME_TYPE_MAP = {
+	"image/png": "png",
+	"image/jpeg": "jpg",
+	"image/jpg": "jpg",
+  };
+  
+  // Multer configrations for saving images on the server
+  const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, 'uploads')
+	  const isValid = MIME_TYPE_MAP[file.mimetype];
+	  let error = new Error("Invalid mime type");
+	  if (isValid) {
+		error = null;
+	  }
+	  cb(error, "uploads");
 	},
 	filename: (req, file, cb) => {
-		cb(null, file.fieldname + '-' + Date.now())
-	}
-});
+	  const name = file.originalname.toLowerCase().split(" ").join("-");
+	  const extension = MIME_TYPE_MAP[file.mimetype];
+	  cb(null, name + "-" + Date.now() + "." + extension);
+	},
+  });
 
-var upload = multer({ storage: storage });
-module.exports = upload;
+  var upload = multer({storage});
+  module.exports = upload;
