@@ -10,6 +10,7 @@ export default ({children}) => {
 
     useEffect(() => {
         AuthService.isAuthenticated().then(res => {
+            console.log(res)
             setUser(res.user);
             setIsAuthenticated(res.isAuthenticated);
             setIsLoaded(true);
