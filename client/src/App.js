@@ -5,9 +5,10 @@ import React, {useContext} from 'react';
 import {AuthContext} from './Context/AuthContext';
 import {Router} from '@reach/router';
 import Login from './Components/LoginForm';
-import RegistrationForm from './Components/RegistrationForm'
-import LandingPage from './Components/LandingPage'
+import RegistrationForm from './Components/RegistrationForm';
+import LandingPage from './Components/LandingPage';
 import UserPage from './Components/UserPage';
+
 
 function App() {
   const {user, setUser, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
