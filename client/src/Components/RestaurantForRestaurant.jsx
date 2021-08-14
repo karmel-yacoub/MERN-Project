@@ -55,7 +55,10 @@ const RestaurantForRestaurant = (props) => {
         }
 
       axios.get('http://localhost:8000/api/deliveries')
-      .then(res =>console.log('deliveries' , res.data))
+      .then(res =>{
+        setDeliveries(res.data)
+        console.log('deliveries' , res.data)
+      })
       .catch(err => err)
     },[id, user , reRender])
     
