@@ -29,8 +29,8 @@ module.exports.findRestaurantOrders = (req, res) => {
 }
 
 module.exports.findDeliveryOrders = (req, res) => {
-    Order.find({})
-        .then(orders => res.json(orders.filter((item , idx)=>item.delivery == req.params.id)))
+    Order.find({delivery: req.params.id})
+        .then(orders => res.json(orders))
         .catch(err => res.json(err))
 }
 
