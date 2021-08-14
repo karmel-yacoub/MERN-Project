@@ -82,7 +82,7 @@ module.exports.createMenuItem = (req, res) => {
                     .then(restaurant => {
                         restaurant.menu.push(item)
                         restaurant.save()
-                            .then(restaurant => res.json(restaurant))
+                            .then(restaurant => res.json(item))
                             .catch((err) => {
                                 console.log(err)
                             })

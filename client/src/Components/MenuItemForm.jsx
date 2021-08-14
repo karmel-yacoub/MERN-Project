@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
-export default function FormDialog() {
+export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
@@ -39,6 +39,8 @@ export default function FormDialog() {
                 setPrice(0);
                 setDescription("");
                 setPicture("");
+                const modifiedItems = [...props.menuItems, res.data]
+                props.updateMenuItems(modifiedItems);
             })
             .catch(err => console.log(err));
     };
