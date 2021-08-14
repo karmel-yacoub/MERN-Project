@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styles from '../styles/css/profile.module.css';
 import { AuthContext } from '../Context/AuthContext'
+import {Link} from '@reach/router'
 
 const Prof = props => {
     const { user, setUser, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const Prof = props => {
             <hr />
             <p>Phone Number: {user.phone.toUpperCase()}.</p>
             <p> Email: {user.email.toUpperCase()}.</p>
-            <a class={styles.btn}>Read More </a>
+            <Link to='' className={styles.btn}>Edit Profile</Link>
             <div className={styles.space}></div>
         </div>
     )
