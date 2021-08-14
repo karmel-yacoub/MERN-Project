@@ -22,11 +22,13 @@ import CustomerForDelivery from './Components/CustomerForDelivery';
 import RestaurantForRestaurant from './Components/RestaurantForRestaurant';
 
 
-
 import CreateMeal from './Components/CreateMeal';
 import CustomerForCustomer from './Components/CustomerForCustomer';
 import Prof from './Components/Prof';
 import RestaurantForCustomer from './Components/RestaurantForCustomer';
+import DeliveryForDelivery from './Components/DeliveryForDelivery';
+import DeliveryForRestaurant from './Components/DeliveryForRestaurant';
+import DeliveryForCustomer from './Components/DeliveryForCustomer';
 
 
 
@@ -44,7 +46,8 @@ function App() {
         <Login path="/login" />
         <RegistrationForm path="/registration" />
 
-        <LandingPage path='/'/>
+        <LandingPage path='/' />
+
 
 
 
@@ -55,12 +58,13 @@ function App() {
         {/* <UserPage path='/users/:id'/> */}
         <UnPrivateComponent Component={RelativeViews} ForRestView={CustomerForRestaurant} ForCustomerView={CustomerForCustomer} ForDeliveryView={CustomerForDelivery} path="/customers/:id" />
         <UnPrivateComponent Component={RelativeViews} ForRestView={RestaurantForRestaurant} ForCustomerView={RestaurantForCustomer} ForDeliveryView={RestaurantForCustomer} path="/restaurants/:id" />
+        <UnPrivateComponent Component={RelativeViews} ForRestView={DeliveryForRestaurant} ForCustomerView={DeliveryForCustomer} ForDeliveryView={DeliveryForDelivery} path="/deliverys/:id" />
         {/* <UnPrivateComponent Component={Delivery} path="deliveries" /> */}
         {/* <UnPrivateComponent Component={Customer} path="customers" /> */}
 
 
-        <UserPage path='/users/:id'/>
-        <OrdersTable path='/order'/>
+        <UserPage path='/users/:id' />
+        <OrdersTable path='/order' />
 
 
         <UserPage path='/users/:id' />
@@ -68,8 +72,8 @@ function App() {
 
         {/* <UserPage path='/users/:id'/> */}
         {/* <UnPrivateComponent Component={RelativeViews} ForRestView={} ForCustomerView={} ForDeliveryView={} path="/restaurants/:id" /> */}
-        <UnPrivateComponent Component={Delivery} path="/deliveries" />
-        <UnPrivateComponent Component={Customer} path="/customers" />
+        {/* <UnPrivateComponent Component={Delivery} path="/deliveries" /> */}
+        {/* <UnPrivateComponent Component={Customer} path="/customers" /> */}
 
 
 
