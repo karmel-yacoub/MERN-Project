@@ -22,7 +22,6 @@ import CustomerForDelivery from './Components/CustomerForDelivery';
 import RestaurantForRestaurant from './Components/RestaurantForRestaurant';
 
 
-
 import CreateMeal from './Components/CreateMeal';
 import CustomerForCustomer from './Components/CustomerForCustomer';
 import Prof from './Components/Prof';
@@ -44,7 +43,7 @@ function App() {
         <Login path="/login" />
         <RegistrationForm path="/registration" />
 
-        <LandingPage path='/'/>
+        <LandingPage path='/' />
         <LandingPage path='/' />
 
 
@@ -60,8 +59,8 @@ function App() {
         {/* <UnPrivateComponent Component={Customer} path="customers" /> */}
 
 
-        <UserPage path='/users/:id'/>
-        <OrdersTable path='/order'/>
+        <UserPage path='/users/:id' />
+        <OrdersTable path='/order' />
 
 
         <UserPage path='/users/:id' />

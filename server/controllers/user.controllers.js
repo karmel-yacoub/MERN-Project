@@ -37,7 +37,7 @@ module.exports.login = (req, res) => {
 }
 
 module.exports.getOneUser = (req, res) => {
-    User.findOne({ _id: req.params.id })
+    User.findOne({ _id: req.params.id }).populate('menu')
         .then(user => res.json(user))
         .catch(err => res.json(err))
 }

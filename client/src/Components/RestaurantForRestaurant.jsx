@@ -32,12 +32,6 @@ const RestaurantForRestaurant = (props) => {
     }
   ];
 
-
-
-
-
-
-
   useEffect(() => {
 
     if (id === user._id) {
@@ -84,7 +78,7 @@ const RestaurantForRestaurant = (props) => {
                   tableHeaders={tableHeaders}
                   tableBodies={tableBodies}
                 />
-                <Menu />
+                <Menu id={id} />
               </div>
               :
               null
