@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
+const path = require('path');
 
 require('./config/mongoose.config');
 app.use(cors({
@@ -12,6 +13,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/images", express.static(path.join("uploads")));
 app.use(passport.initialize());
 app.use(cookieParser());
 

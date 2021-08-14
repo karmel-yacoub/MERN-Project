@@ -8,6 +8,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+
+
+
 // import Title from './Title';
 
 // Generate Order Data
@@ -59,7 +62,6 @@ export default function OrdersTable() {
             <TableCell>Date</TableCell>
             <TableCell>Delivary</TableCell>
             <TableCell>Status</TableCell>
-            <TableCell>Sale Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,7 +71,8 @@ export default function OrdersTable() {
               <TableCell>{order.customer}</TableCell>
               <TableCell>{order.price}</TableCell>
               <TableCell>{order.date}</TableCell>
-              <TableCell>{order.amount}</TableCell>
+              <TableCell>{order.delivery}</TableCell>
+              <TableCell>{order.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>

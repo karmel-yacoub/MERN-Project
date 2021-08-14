@@ -19,8 +19,6 @@ const OrderSchema = new mongoose.Schema({
     restaurant:{ type: Schema.Types.ObjectId, ref: 'User'},
     delivery:{ type: Schema.Types.ObjectId, ref: 'User'},
     
-    
-
 } , {timestamps: true})
 
 module.exports.OrderSchema =  OrderSchema;

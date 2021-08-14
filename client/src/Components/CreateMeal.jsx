@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import AuthService from '../Services/AuthService';
 import {AuthContext} from '../Context/AuthContext';
 import {Link, navigate} from '@reach/router'
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -49,91 +50,109 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function CreateMeal(props) {
+    const {user, setUser, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
     const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
+    const [price, setPrice] = useState();
+    const [description, setDescription] = useState("");
+    const [disabled , setDisabled] = useState(true);
+    const [error , setError] =useState('')
     const classes = useStyles();
-    const authContext = useContext(AuthContext);
+
     // const {user, setUser, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
 
-    const signIn = (e) => {
+    const create = (e) => {
         e.preventDefault();
-        AuthService.login({name, password})
-        .then(data => {
-            if (data.isAuthenticated) {
-                authContext.setUser(data.user);
-                authContext.setIsAuthenticated(data.isAuthenticated);
-                navigate("/")
-            }
-            else {
-                setMessage(data.message);
-            }
-        });
+        axios.post('http://localhost:8000/api/menuitems', {
+            name,
+            price,
+            description,
+        })
+            .then(res=>{
+                console.log('result' , res)
+                navigate('/restaurats/'+user._id)
+            })
     };
+
+    const checkPrice = (e) => {
+        setPrice(e.target.value)
+        if(e.target.value === 0 | e.target.value.length < 1 ){
+            setDisabled(true)
+            setError('Price should be greater than zero $')
+        }
+        else{
+            setDisabled(false);
+            setError('');
+        }
+    }
+
+
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        {/* <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> */}
-        <Typography component="h1" variant="h5">
-        
-          Sign in
+        <Typography component="h3" variant="h5">
+          Create Meal
         </Typography>
-        <form className={classes.form} noValidate onSubmit={signIn}>
-          {message}
+        <form className={classes.form} noValidate onSubmit={create}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="name"
+            label="Meal Name"
+            name="name"
+            autoComplete="name"
             autoFocus
             value={name}
             onChange={e => setName(e.target.value)}
           />
-          <TextField
+        <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            name="price"
+            label="Price"
+            type="price"
+            id="price"
+            autoComplete="price"
+            value={price}
+            onChange={(e) => checkPrice(e)}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+        <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="Description"
+            label="Description"
+            type="Description"
+            id="Description"
+            autoComplete="Description"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
           />
+
+
+
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={disabled}
           >
-            Sign In
+            Create
           </Button>
+          <p>{error}</p>
           <Grid container>
             <Grid item xs>
-              <Link to="" variant="body2">
-                Forgot password?
-              </Link>
             </Grid>
             <Grid item>
-              <Link to="/registration" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
             </Grid>
           </Grid>
         </form>

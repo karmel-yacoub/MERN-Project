@@ -6,11 +6,11 @@ const passport = require('passport');
 
 
 module.exports = (app) => {
-    app.post('/register', upload.single('image'), LoginController.createUser);
+    app.post('/register', upload.single('picture'), LoginController.createUser);
     app.post('/login', passport.authenticate('local', {session:false}), LoginController.login);
     app.post('/logout', passport.authenticate('jwt', {session:false}), LoginController.logout);
     app.get('/authenticated', passport.authenticate('jwt', {session:false}), LoginController.authenticate);
-    app.post('/api/menuitem', upload.single('image'), UserController.createMenuItem);
+    app.post('/api/menuitem', passport.authenticate('jwt', {session:false}), upload.single('picture'), UserController.createMenuItem);
     app.get ('/api/users/:id',UserController.getOneUser);
     app.get ('/api/users',UserController.getAllUsers);
     app.put ('/api/users/:id',UserController.updateUser);

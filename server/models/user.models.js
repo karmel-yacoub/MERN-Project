@@ -40,9 +40,9 @@ const UserSchema = new mongoose.Schema({
         defult:'customer',
         required:true,
     },
-    picture:{
-        data:Buffer,
-        contentType:String,
+    picture: {
+        type: String,
+        required:true
     },
     menu:[MenuItemSchema],
     orders:[OrderSchema]

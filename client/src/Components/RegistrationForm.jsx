@@ -64,13 +64,22 @@ export default function SignUp() {
     const [disabled, setDisabled] = useState(" ");
     const [passError, setPassError] = useState("");
     const authContext = useContext(AuthContext);
+    const [picture,setPicture] = useState();
 
   const classes = useStyles();
 
 
   const signUp = (e) => {
     e.preventDefault();
-    AuthService.register({name,email,password,phone,location,genre})
+    const fd = new FormData();
+    fd.append('picture',picture, picture.name);
+    fd.append('email',email);
+    fd.append('password',password);
+    fd.append('phone',phone);
+    fd.append('location',location);
+    fd.append('genre',genre);
+    fd.append('name',name);
+    AuthService.register(fd)
     .then(data => {
         if(!data.errors) {
         // console.log(data);
@@ -209,11 +218,17 @@ const confPass = (e) => {
                 autoComplete="current-password"
               />
             </Grid>
-            
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+              <TextField
+              onChange={e => setPicture(e.target.files[0])}
+                variant="outlined"
+                required
+                fullWidth
+                id="picture"
+                // label="Picture"
+                name="picture"
+                autoComplete="picture"
+                type="file"
               />
             </Grid>
           </Grid>
