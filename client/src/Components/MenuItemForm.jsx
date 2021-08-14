@@ -6,14 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import axios from 'axios';
 
 export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState(0);
-    const [picture, setPicture] = useState();
-
+    const [description, setDescription] = useState("");
+    const [picture, setPicture] = useState("");
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -21,6 +21,7 @@ export default function FormDialog() {
 
     const handleClose = () => {
         setOpen(false);
+        setPicture("");
     };
 
     const newItem = (e) => {
@@ -30,11 +31,18 @@ export default function FormDialog() {
         fd.append('name', name);
         fd.append('price', price);
         fd.append('description', description);
-
+        axios.post('http://localhost:8000/api/menuitem', fd)
+            .then(res => {
+                console.log(res);
+                setOpen(false);
+                setName("");
+                setPrice(0);
+                setDescription("");
+                setPicture("");
+            })
+            .catch(err => console.log(err));
     };
-    const handleAdd = () => {
 
-    }
 
     return (
         <div>
@@ -91,7 +99,7 @@ export default function FormDialog() {
                     <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={handleAdd} color="primary">
+                    <Button onClick={newItem} color="primary" disabled={typeof (picture) === "object" ? false : true}>
                         Add
                     </Button>
                 </DialogActions>
