@@ -78,6 +78,7 @@ const RestaurantForRestaurant = (props) => {
                   setReRender={setReRender}
                   reRender={reRender}
                 />
+                <Menu id={id} />
               </div>
               :
               null
@@ -86,5 +87,5 @@ const RestaurantForRestaurant = (props) => {
       }
     </div>
   )
-
-  export default RestaurantForRestaurant
+}
+export default RestaurantForRestaurant
