@@ -86,7 +86,5 @@ const RestaurantForRestaurant = (props) => {
       }
     </div>
   )
-}
->>>>>>> 8a7b3250e015471328c20f5cac58dd4aadf4bfab
 
-export default RestaurantForRestaurant
+  export default RestaurantForRestaurant
