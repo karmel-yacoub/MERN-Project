@@ -72,14 +72,18 @@ const RestaurantForRestaurant = (props) => {
           </div>
           {
             user._id === id ?
-              <div className={styles.table}>
-                <TableList
-                  data={tabledata}
-                  tableHeaders={tableHeaders}
-                  tableBodies={tableBodies}
-                />
+              <div>
+                <div className={styles.table}>
+                  <TableList
+                    data={tabledata}
+                    tableHeaders={tableHeaders}
+                    tableBodies={tableBodies}
+                  />
+                </div>
                 <Menu id={id} />
+
               </div>
+
               :
               null
           }

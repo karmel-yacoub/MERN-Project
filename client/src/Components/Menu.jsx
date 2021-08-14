@@ -77,6 +77,10 @@ const Menu = (props) => {
 
     };
 
+    const updateMenuItems = (modifiedItems) => {
+        setMenuItems(modifiedItems);
+    }
+
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/users/" + props.id)
@@ -90,7 +94,7 @@ const Menu = (props) => {
 
     return (
         <div>
-            <MenuItemForm />
+            <MenuItemForm updateMenuItems={updateMenuItems} menuItems={menuItems} />
             <React.Fragment>
 
                 <main>
