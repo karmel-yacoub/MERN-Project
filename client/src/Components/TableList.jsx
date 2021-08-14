@@ -65,6 +65,8 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
   // console.log('ddd' , tableBodies[5])
   const [delivery , setDelivery] = useState('')
 
+  console.log('genre' , user.genre)
+
 
   const onClickChangeStatus = (e,id) =>{
     axios.put('http://localhost:8000/api/orders/status/'+id )
@@ -109,7 +111,7 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
                 )}
 
                 {
-                  user.genre === 'delivery' ?
+                  user.genre === 'restaurant' ?
                   <>
                   {
                   data["delivery"] === undefined ?

@@ -29,7 +29,7 @@ module.exports.findRestaurantOrders = (req, res) => {
 }
 
 module.exports.findDeliveryOrders = (req, res) => {
-    Order.find({delivery: req.params.id})
+    Order.find({delivery: req.params.id}).populate('customer restaurant dilivery')
         .then(orders => res.json(orders))
         .catch(err => res.json(err))
 }
