@@ -7,7 +7,7 @@ const UnPrivateComponent = ({ Component, roles, ForRestView, ForCustomerView, Fo
 
 
     return (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex",width:'100%' }}>
             {
                 isAuthenticated ?
                     <Component ForRestView={ForRestView} ForCustomerView={ForCustomerView} ForDeliveryView={ForDeliveryView} id={id} /> :

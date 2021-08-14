@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -8,6 +8,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -55,8 +56,15 @@ const ButtonLink = prop => {
   );
 };
 
+const onClickHandler = (e,id) =>{
+  axios.put('http://localhost:8000/api/orders/status/'+id )
+  .then(res => console.log(res))
+}
+
 const TableList = ({ data, tableHeaders, tableBodies }) => {
   const classes = useStyles();
+  console.log('ddd' , tableBodies[5])
+  const [delivery , setDelivery] = useState('')
 
   return (
     <Paper className={classes.root}>
@@ -70,17 +78,25 @@ const TableList = ({ data, tableHeaders, tableBodies }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(data => (
-              <TableRow key={data._id}>
-                {tableBodies.map(body =>
+            {data.map((data , idx) => (
+              <TableRow key={idx}>
+                {tableBodies.map((body,idx) =>
                   typeof body === "string" ? (
                     <TableCell key={body}>{getProperty(data, body)}</TableCell>
-                  ) : (
-                    <TableCell key={body}>
-                      <ButtonLink link={body.base} icon={body.icon} />
-                    </TableCell>
-                  )
+                  ) : 
+                  null
                 )}
+                <TableCell >
+                  <select onChange={setDelivery}>
+                    <option value='' hidden></option>
+                    {tableBodies[5].map((item,idx)=>{
+                      return <option key={idx} value={item._id}>{item.name}</option>
+                    })}
+                  </select>
+                </TableCell>
+                <TableCell >
+                  <button onClick={ (e) => onClickHandler(e,data._id)}>Action</button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
