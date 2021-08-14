@@ -144,11 +144,20 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
                   </TableCell>
                   
                   <TableCell >
-                    <button onClick={ (e) => onClickHandler(e , data._id)}>Select Delivery</button>
+                    <button onClick={ (e) => onClickHandler(e , data._id)} disabled={data.status !== 'readyToDeliver'}>Select Delivery</button>
                   </TableCell>
                 </>
                 :
-                  null
+                <>
+                  <TableCell >
+                    <select disabled='ture'>
+                      <option>Selcet Delivery</option>
+                    </select>
+                  </TableCell>
+                  <TableCell >
+                    <button disabled='ture'>Select Delivery</button>
+                  </TableCell>
+                </>
                   }
                 </>
                 :
@@ -168,19 +177,39 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
                 }
 
                 {
-                  data.status === 'requested' ?
+                  user.genre === 'restaurant' && data.status === 'requested' ?
                   <TableCell >
                     <button onClick={ (e) => onClickChangeStatus(e,data._id)}>Accept</button>
                   </TableCell>
                   :
-                  data.status === 'accepted' ?
+                  user.genre === 'restaurant' && data.status === 'accepted' ?
                   <TableCell >
                     <button onClick={ (e) => onClickChangeStatus(e,data._id)}>Ready</button>
                   </TableCell>
                   :
+                  user.genre === 'restaurant' ?
+                  <TableCell >
+                    <button disabled='true'>Ready</button>
+                  </TableCell>
+                  :
                   null
                 }
-                
+                  {user.genre === 'customer' ?
+                  <>
+                    {
+                    data.status === 'inWay'?
+                    <TableCell >
+                      <button onClick={ (e) => onClickChangeStatus(e , data._id)}>Recieved</button>
+                    </TableCell>
+                    :
+                    <TableCell >
+                      <button disabled='ture'>Recieved</button>
+                    </TableCell>
+                    }
+                  </>
+                    :
+                    null
+                  }
               </TableRow>
             ))}
           </TableBody>

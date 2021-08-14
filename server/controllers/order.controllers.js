@@ -17,8 +17,11 @@ module.exports.getOneOrder = (req, res) => {
 
 
 module.exports.findUserOrders = (req, res) => {
-    Order.find({})
-        .then(orders => res.json(orders.filter((item , idx)=>item.customer == req.params.id)))
+    Order.find({customer: req.params.id}).populate('customer restaurant delivery')
+        .then(orders => {
+            console.log('orders' , orders)
+            res.json(orders)
+        })
         .catch(err => res.json(err))
 }
 

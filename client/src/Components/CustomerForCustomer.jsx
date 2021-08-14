@@ -4,26 +4,81 @@ import { AuthContext } from '../Context/AuthContext';
 import RelativeViews from './RelativeViews';
 import Prof from './Prof';
 import axios from 'axios';
+import TableList from './TableList'
+import styles from '../styles/css/restaurant.module.css'
 
-const Customer = ({ id }) => {
-    const { user } = useContext(AuthContext);
-    const [data, setData] = useState({})
-    useEffect(() => {
-        if(user._id !== id){
-            axios.get('http://localhost:8000/api/users/'+id)
+
+const Customer = (props) => {
+    const {user}=useContext(AuthContext)
+    const {id} = props
+    const [data ,setData] = useState({})
+    const [loaded ,setLoaded] = useState(false)
+    const [tabledata , setTabledata] = useState([])
+    const [reRender, setReRender] = useState(true)
+
+      
+      const tableHeaders = ["Restaurant", "Delivery" ,"Date", "Price" ,"Status", "Action"];
+      
+      const tableBodies = [
+        `restaurant.name`,
+        `delivery.name`,
+        `createdAt`,
+        'price',
+        'status',
+        {
+          base: "/user",
+          param: `id`,
+        //   icon: <VisibilityIcon />
+        }
+      ];
+
+    useEffect (()=>{
+
+        if(id === user._id){
+            setData(user)
+            axios.get('http://localhost:8000/api/orders/user/' + user._id)
             .then(res => {
-                setData(res.json)
-                console.log(res.json)
+              setLoaded(true)
+              console.log('table data',res.data)
+              setTabledata(res.data)
             })
             .catch(err => console.log(err))
         }
-    }, [id])
+        else if (id !== user._id){
+            axios.get('http://localhost:8000/api/users/'+id)
+            .then(res => {
+                console.log('not same' , res.data)
+                setData(res.data)
+                setLoaded(true)
+            })
+            .catch(err => err)
+        }
+    },[id, user , reRender])
+
+
     return (
-        <div>
+        <div className={styles.flexo}>
             {
+                loaded && 
+                <>
+                <div className={styles.prof}>
+                    <Prof data={data} />
+                </div>
+                {
                 user._id === id ?
-                    <Prof data={user} /> :
-                    <Redirect to="/" noThrow />
+                <div className={styles.table}>
+                    <TableList
+                        data={tabledata}
+                        tableHeaders={tableHeaders}
+                        tableBodies={tableBodies}
+                        setReRender={setReRender}
+                        reRender={reRender}
+                        />
+                </div>
+                :
+                null
+                }
+                </>
             }
         </div>
     )
