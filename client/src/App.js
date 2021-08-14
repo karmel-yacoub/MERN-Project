@@ -53,7 +53,7 @@ function App() {
         <Prof path='/profile' />
 
         {/* <UserPage path='/users/:id'/> */}
-        <UnPrivateComponent Component={RelativeViews} ForRestView={CustomerForCustomer} ForCustomerView={CustomerForCustomer} ForDeliveryView={CustomerForCustomer} path="/customers/:id" />
+        <UnPrivateComponent Component={RelativeViews} ForRestView={CustomerForRestaurant} ForCustomerView={CustomerForCustomer} ForDeliveryView={CustomerForCustomer} path="/customers/:id" />
         <UnPrivateComponent Component={RelativeViews} ForRestView={RestaurantForCustomer} ForCustomerView={RestaurantForCustomer} ForDeliveryView={RestaurantForCustomer} path="/restaurants/:id" />
         {/* <UnPrivateComponent Component={Delivery} path="deliveries" /> */}
         {/* <UnPrivateComponent Component={Customer} path="customers" /> */}
