@@ -43,11 +43,12 @@ const RestaurantForRestaurant = (props) => {
 
     if (id === user._id) {
       setData(user)
-      setLoaded(true)
+      
       axios.get('http://localhost:8000/api/orders/restaurant/' + user._id)
         .then(res => {
           // console.log('table data',res.data)
           setTabledata(res.data)
+          setLoaded(true)
         })
         .catch(err => console.log(err))
     }

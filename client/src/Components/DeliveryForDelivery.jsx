@@ -14,39 +14,6 @@ const DeliveryForDelivery = (props) => {
     const [loaded ,setLoaded] = useState(false)
     const [tabledata , setTabledata] = useState([])
 
-
-
-
-    // const Tabledata = [
-    //     {
-    //       id: 23,
-    //       order: {
-    //         owner: {
-    //           id: 5,
-    //           user: {
-    //             id: 4,
-    //             first_name: "John",
-    //             last_name: "Doe"
-    //           }
-    //         }
-    //       },
-    //       application_date: "2020-07-06"
-    //     },
-    //     {
-    //       id: 24,
-    //       order: {
-    //         owner: {
-    //           id: 5,
-    //           user: {
-    //             id: 4,
-    //             first_name: "Jane",
-    //             last_name: "Doe"
-    //           }
-    //         }
-    //       },
-    //       application_date: "2020-07-06"
-    //     }
-    //   ];
       
       const tableHeaders = ["Restaurant", "Customer" ,"Date", "Price" , "Action"];
       
@@ -72,9 +39,10 @@ const DeliveryForDelivery = (props) => {
 
         if(id === user._id){
             setData(user)
-            setLoaded(true)
+            
             axios.get('http://localhost:8000/api/orders/delivery/' + user._id)
             .then(res => {
+              setLoaded(true)
               console.log('table data',res.data)
               setTabledata(res.data)
             })

@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from "react";
+import React , {useState , useEffect , useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -9,6 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import { AuthContext } from '../Context/AuthContext'
 // import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -59,7 +60,7 @@ const ButtonLink = prop => {
 
 
 const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) => {
-
+  const { user } = useContext(AuthContext)
   const classes = useStyles();
   // console.log('ddd' , tableBodies[5])
   const [delivery , setDelivery] = useState('')
@@ -108,6 +109,9 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
                 )}
 
                 {
+                  user.genre === 'delivery' ?
+                  <>
+                  {
                   data["delivery"] === undefined ?
                   <>
                     <TableCell >
@@ -125,6 +129,13 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
                 </>
                 :
                   null
+                  }
+                </>
+                :
+                user.genre === 'delivery' ?
+                <p>Delivery Row</p>
+                :
+                null
                 }
 
                 {
