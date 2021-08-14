@@ -16,9 +16,10 @@ import UnPrivateComponent from './HOCs/UnPrivateComponent';
 import Customer from './Components/CustomerForCustomer';
 import Delivery from './Components/Delivery';
 import RelativeViews from './Components/RelativeViews';
-
-import Profile from './Components/Profile';
+import CustomerForRestaurant from './Components/CustomerForRestaurant';
 import Navbar from './Components/Navbar';
+import CustomerForDelivery from './Components/CustomerForDelivery';
+import RestaurantForRestaurant from './Components/RestaurantForRestaurant';
 
 
 
@@ -53,8 +54,8 @@ function App() {
         <Prof path='/profile' />
 
         {/* <UserPage path='/users/:id'/> */}
-        <UnPrivateComponent Component={RelativeViews} ForRestView={CustomerForRestaurant} ForCustomerView={CustomerForCustomer} ForDeliveryView={CustomerForCustomer} path="/customers/:id" />
-        <UnPrivateComponent Component={RelativeViews} ForRestView={RestaurantForCustomer} ForCustomerView={RestaurantForCustomer} ForDeliveryView={RestaurantForCustomer} path="/restaurants/:id" />
+        <UnPrivateComponent Component={RelativeViews} ForRestView={CustomerForRestaurant} ForCustomerView={CustomerForCustomer} ForDeliveryView={CustomerForDelivery} path="/customers/:id" />
+        <UnPrivateComponent Component={RelativeViews} ForRestView={RestaurantForRestaurant} ForCustomerView={RestaurantForCustomer} ForDeliveryView={RestaurantForCustomer} path="/restaurants/:id" />
         {/* <UnPrivateComponent Component={Delivery} path="deliveries" /> */}
         {/* <UnPrivateComponent Component={Customer} path="customers" /> */}
 
