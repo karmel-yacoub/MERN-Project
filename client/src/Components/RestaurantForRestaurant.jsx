@@ -4,6 +4,7 @@ import { AuthContext } from '../Context/AuthContext'
 import OrdersTable from './OrdersTable'
 import Prof from './Prof'
 import TableList from './TableList'
+import styles from '../styles/css/restaurant.module.css'
 // import VisibilityIcon from "@material-ui/icons/Visibility";
 
 const RestaurantForRestaurant = (props) => {
@@ -11,48 +12,49 @@ const RestaurantForRestaurant = (props) => {
     const {id} = props
     const [data ,setData] = useState({})
     const [loaded ,setLoaded] = useState(false)
+    const [tabledata , setTabledata] = useState([])
 
 
 
 
-
-    const Tabledata = [
-        {
-          id: 23,
-          order: {
-            owner: {
-              id: 5,
-              user: {
-                id: 4,
-                first_name: "John",
-                last_name: "Doe"
-              }
-            }
-          },
-          application_date: "2020-07-06"
-        },
-        {
-          id: 24,
-          order: {
-            owner: {
-              id: 5,
-              user: {
-                id: 4,
-                first_name: "Jane",
-                last_name: "Doe"
-              }
-            }
-          },
-          application_date: "2020-07-06"
-        }
-      ];
+    // const Tabledata = [
+    //     {
+    //       id: 23,
+    //       order: {
+    //         owner: {
+    //           id: 5,
+    //           user: {
+    //             id: 4,
+    //             first_name: "John",
+    //             last_name: "Doe"
+    //           }
+    //         }
+    //       },
+    //       application_date: "2020-07-06"
+    //     },
+    //     {
+    //       id: 24,
+    //       order: {
+    //         owner: {
+    //           id: 5,
+    //           user: {
+    //             id: 4,
+    //             first_name: "Jane",
+    //             last_name: "Doe"
+    //           }
+    //         }
+    //       },
+    //       application_date: "2020-07-06"
+    //     }
+    //   ];
       
-      const tableHeaders = ["ID", "First Name", "Last Name", "Options"];
+      const tableHeaders = ["Customer", "Delivery" ,"Date", "Price" , "Action"];
       
       const tableBodies = [
-        `id`,
-        `order.owner.user.first_name`,
-        `order.owner.user.last_name`,
+        `customer.name`,
+        `delivery.name`,
+        `createdAt`,
+        'price',
         {
           base: "/user",
           param: `id`,
@@ -64,11 +66,19 @@ const RestaurantForRestaurant = (props) => {
 
 
 
+
+
     useEffect (()=>{
 
         if(id === user._id){
             setData(user)
             setLoaded(true)
+            axios.get('http://localhost:8000/api/orders/restaurant/' + user._id)
+            .then(res => {
+              console.log('table data',res.data)
+              setTabledata(res.data)
+            })
+            .catch(err => console.log(err))
         }
         else if (id !== user._id){
             axios.get('http://localhost:8000/api/users/'+id)
@@ -82,18 +92,22 @@ const RestaurantForRestaurant = (props) => {
     },[id, user])
     
     return (
-        <div>
+        <div className={styles.flexo}>
             {
                 loaded && 
                 <>
-                <Prof data={data} />
+                <div className={styles.prof}>
+                  <Prof data={data} />
+                </div>
                 {
                 user._id === id ?
+                <div className={styles.table}>
                     <TableList
-                        data={Tabledata}
+                        data={tabledata}
                         tableHeaders={tableHeaders}
                         tableBodies={tableBodies}
                         />
+                </div>
                 :
                 null
                 }

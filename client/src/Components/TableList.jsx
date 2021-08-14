@@ -71,7 +71,7 @@ const TableList = ({ data, tableHeaders, tableBodies }) => {
           </TableHead>
           <TableBody>
             {data.map(data => (
-              <TableRow key={data.id}>
+              <TableRow key={data._id}>
                 {tableBodies.map(body =>
                   typeof body === "string" ? (
                     <TableCell key={body}>{getProperty(data, body)}</TableCell>

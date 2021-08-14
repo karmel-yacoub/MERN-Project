@@ -1,5 +1,6 @@
 
 const {Order, OrderSchema}= require('../models/order.models');
+const {User}= require('../models/user.models');
 
 module.exports.findAllOrders = (request,response)=>{
     Order.find({})
@@ -21,9 +22,9 @@ module.exports.findUserOrders = (req, res) => {
         .catch(err => res.json(err))
 }
 
-module.exports.findrestaurantOrders = (req, res) => {
-    Order.find({})
-        .then(orders => res.json(orders.filter((item , idx)=>item.restaurant == req.params.id)))
+module.exports.findRestaurantOrders = (req, res) => { 
+    Order.find({restaurant: req.params.id}).populate('customer restaurant')
+        .then(orders => res.json(orders))
         .catch(err => res.json(err))
 }
 

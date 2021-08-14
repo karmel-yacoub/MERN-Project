@@ -16,6 +16,7 @@ module.exports = (app) => {
     app.put ('/api/users/:id',UserController.updateUser);
     app.get ('/api/customers',UserController.getAllCustomers);
     app.get ('/api/restaurants',UserController.getAllrestaurants);
+    
     app.get ('/api/deliveries',UserController.getAllDeliveries);
     // app.put('/api/users/:id',UserController.updateUser);
     // app.delete('/api/users/:id', UserController.deleteUser);
