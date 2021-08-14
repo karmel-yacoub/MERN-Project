@@ -1,91 +1,97 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+// import ShareIcon from '@material-ui/icons/Share';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { AuthContext } from '../Context/AuthContext'
 
 const useStyles = makeStyles((theme) => ({
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
+    root: {
+        maxWidth: 345,
+        backgroundColor: "#3f51b5",
+        color: "#ffffff",
+        padding: "20px",
+        margin: "20px",
+        borderRadius: "20px",
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+        borderRadius: "20px"
+    },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+    },
+    expandOpen: {
+        transform: 'rotate(180deg)',
+    },
+    avatar: {
+        backgroundColor: red[500],
+    },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+export default function RecipeReviewCard() {
+    const { user, setUser, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    const classes = useStyles();
+    const [expanded, setExpanded] = React.useState(false);
 
-export default function Profile() {
-  const classes = useStyles();
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
 
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <main>
-        {/* Hero unit */}
-        <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe the content.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </main>
-    
-    </React.Fragment>
-  );
+    return (
+        <Card className={classes.root}>
+            <CardHeader
+                avatar={
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                        {user.name[0].toUpperCase()}{user.name[1].toUpperCase()}
+                    </Avatar>
+                }
+                action={
+                    <IconButton aria-label="settings">
+                        {/* <MoreVertIcon /> */}
+                    </IconButton>
+                }
+                title={user.name.toUpperCase()}
+                subheader={user.createdAt}
+            />
+            <CardMedia
+                className={classes.media}
+                image={user.picture}
+                title="Paella dish"
+            />
+            <CardContent style={{ marginTop: "20px" }}>
+                <Typography style={{ fontSize: "20px" }} variant="body2" color="#ffffff" component="h1">
+                    Location: {user.location.toUpperCase()}
+                </Typography>
+                <Typography style={{ fontSize: "20px" }} variant="body2" color="#ffffff" component="h1">
+                    Phone Number: {user.phone.toUpperCase()}
+                </Typography>
+                <Typography style={{ fontSize: "20px" }} variant="body2" color="#ffffff" component="h1">
+                    Email: {user.email.toUpperCase()}
+                </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                    {/* <FavoriteIcon /> */}
+                </IconButton>
+            </CardActions>
+        </Card>
+    );
 }

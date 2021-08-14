@@ -16,7 +16,12 @@ var path = require('path');
 
 module.exports.createUser=(req,res) => {
     const url = req.protocol + "://" + req.get("host");
+    console.log("--------------------------------------");
+    console.log(req.body)
+    console.log(req.file.filename)
     const{name , email , password ,phone , location, genre , menu} = req.body;
+    // console.log(location);
+    console.log("--------------------------------------");
     User.create({
         name,
         email,
@@ -37,10 +42,10 @@ module.exports.createUser=(req,res) => {
 module.exports.login = (req, res) => {
     console.log("login....")
     if(req.isAuthenticated()) {
-        const {_id, name, genre} = req.user;
+        const {_id, name, genre,picture,phone,location,email,createdAt} = req.user;
         const token = signToken(_id);
         res.cookie('access_token', token, {httpOnly: true, sameSite: true});
-        res.status(200).json({isAuthenticated: true, user: {name, genre, _id}});
+        res.status(200).json({isAuthenticated: true, user: {_id, name, genre,picture,phone,location,email,createdAt}});
     }
 }
 
@@ -52,6 +57,6 @@ module.exports.logout = (req, res) => {
 
 module.exports.authenticate = (req, res) => {
     // console.log("authenticate....")
-    const {name, genre} = req.user;
-    res.status(200).json({isAuthenticated:true, user:{name, genre}})
+    const {_id, name, genre,picture,phone,location,email,createdAt} = req.user;
+    res.status(200).json({isAuthenticated:true, user:{_id, name, genre,picture,phone,location,email,createdAt}})
 }

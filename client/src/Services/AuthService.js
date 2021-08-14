@@ -9,9 +9,11 @@ export default {
             return res.data;
         })
         .catch(res => {
-            // console.log(res);
-            // res.message = "Not"
-            return res.data;
+            // Object.keys(res).map((key) =>{
+            //     console.log(key ,res[key])
+            // })
+            res.message = "Wrong credentials"
+            return res;
         })
     },
     register: user => {

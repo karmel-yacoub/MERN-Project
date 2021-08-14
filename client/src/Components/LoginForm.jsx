@@ -61,16 +61,13 @@ export default function SignIn() {
         e.preventDefault();
         AuthService.login({name, password})
         .then(data => {
-            console.log("form",data)
-            console.log("form",data.user)
             if (data.isAuthenticated) {
                 authContext.setUser(data.user);
                 authContext.setIsAuthenticated(data.isAuthenticated);
-                setTimeout(() => navigate("/"), 3000);
+                navigate("/")
             }
             else {
-              setTimeout(function(){ alert("Hello"); }, 3000);
-                setMessage(message);
+                setMessage(data.message);
             }
         });
     };
@@ -87,6 +84,7 @@ export default function SignIn() {
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={signIn}>
+          {message}
           <TextField
             variant="outlined"
             margin="normal"

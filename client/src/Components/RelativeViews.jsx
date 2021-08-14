@@ -1,22 +1,20 @@
 import { Redirect } from '@reach/router';
-import React,{useContext} from 'react';
-import {AuthContext} from '../Context/AuthContext';
+import React, { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
 
-const RelativeViews = ({ForRestView, ForCustomerView, ForDeliveryView}) => {
-    const {user} = useContext(AuthContext);
+const RelativeViews = ({ ForRestView, ForCustomerView, ForDeliveryView, id }) => {
+    const { user } = useContext(AuthContext);
     return (
-        <div>
+        <div style={{ margin: "1%" }}>
             {
                 user.genre === "restaurant" ?
-                <ForRestView /> :
-                user.genre === "customer" ?
-                <ForCustomerView /> :
-                user.genre === "delivery" ?
-                <ForDeliveryView /> :
-                <Redirect to="/" noThrow/>
-                 
+                    <ForRestView id={id} /> :
+                    user.genre === "customer" ?
+                        <ForCustomerView id={id} /> :
+                        user.genre === "delivery" ?
+                            <ForDeliveryView id={id} /> :
+                            <Redirect to="/" noThrow />
             }
-            
         </div>
     )
 }
