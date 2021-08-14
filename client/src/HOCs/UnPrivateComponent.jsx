@@ -11,7 +11,7 @@ const UnPrivateComponent = ({ Component, roles, ForRestView, ForCustomerView, Fo
             {
                 isAuthenticated ?
                     <Component ForRestView={ForRestView} ForCustomerView={ForCustomerView} ForDeliveryView={ForDeliveryView} id={id} /> :
-                    <Redirect to="/login" noThrow />
+                    <Redirect to="/" noThrow />
             }
         </div>
     )
