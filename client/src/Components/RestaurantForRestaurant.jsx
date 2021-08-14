@@ -13,6 +13,11 @@ const RestaurantForRestaurant = (props) => {
     const [data ,setData] = useState({})
     const [loaded ,setLoaded] = useState(false)
     const [tabledata , setTabledata] = useState([])
+    const [reRender , setReRender] = useState(false)
+
+    useEffect(()=>{
+
+    }, [reRender])
       
     const tableHeaders = ["Customer", "Delivery" ,"Date", "Price" , "Status"];
     const [deleveries , setDeliveries] = useState([])
@@ -44,7 +49,7 @@ const RestaurantForRestaurant = (props) => {
             setLoaded(true)
             axios.get('http://localhost:8000/api/orders/restaurant/' + user._id)
             .then(res => {
-              console.log('table data',res.data)
+              // console.log('table data',res.data)
               setTabledata(res.data)
             })
             .catch(err => console.log(err))
@@ -52,7 +57,6 @@ const RestaurantForRestaurant = (props) => {
         else if (id !== user._id){
             axios.get('http://localhost:8000/api/users/'+id)
             .then(res => {
-                console.log('not same' , res.data)
                 setData(res.data)
                 setLoaded(true)
             })
@@ -60,12 +64,14 @@ const RestaurantForRestaurant = (props) => {
         }
       axios.get('http://localhost:8000/api/deliveries')
       .then(res => {
-        console.log('deliveries' , res.data)
+        // console.log('deliveries' , res.data)
         setDeliveries(res.data)
       })
       .catch(err => console.log(err))
 
-    },[id, user])
+      // console.log('rerender',reRender)
+
+    },[id, user , reRender])
     
     return (
         <div className={styles.flexo}>
@@ -82,6 +88,8 @@ const RestaurantForRestaurant = (props) => {
                         data={tabledata}
                         tableHeaders={tableHeaders}
                         tableBodies={tableBodies}
+                        setReRender={setReRender}
+                        reRender={reRender}
                         />
                 </div>
                 :

@@ -112,6 +112,8 @@ module.exports.deliveryOrderUpdate = async (req, res) => {
         .catch(err => response.status(400).json(err))
 }
 
+
+
 module.exports.getAllUsers = (req, res) => {
     User.find()
     .then(user => res.json(user))
