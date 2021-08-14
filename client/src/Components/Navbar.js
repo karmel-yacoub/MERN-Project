@@ -84,7 +84,10 @@ const Navbar = (props) => {
             setIsAuthenticated(false);
             navigate("/")
         })
-
+    }
+    
+    const goToProfile =()=>{
+      navigate('/'+user.genre + 's/'+user._id)
     }
 
     return (
@@ -99,7 +102,11 @@ const Navbar = (props) => {
                     </Typography>
                     {
                         isAuthenticated ?
-                        <Button onClick={logout} color="inherit">logout</Button> :
+                        <>
+                        <Button onClick={goToProfile} color="inherit">Profile</Button> 
+                        <Button onClick={logout} color="inherit">logout</Button> 
+                        </>
+                        :
                         <>
                         <Button onClick={() => navigate("/login")} color="inherit">Login</Button>
                         <Button onClick={() => navigate("/registration")} color="inherit">Register</Button>

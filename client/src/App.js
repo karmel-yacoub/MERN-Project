@@ -25,6 +25,7 @@ import Navbar from './Components/Navbar';
 import CreateMeal from './Components/CreateMeal';
 import CustomerForCustomer from './Components/CustomerForCustomer';
 import Prof from './Components/Prof';
+import RestaurantForCustomer from './Components/RestaurantForCustomer';
 
 
 
@@ -53,6 +54,7 @@ function App() {
 
         {/* <UserPage path='/users/:id'/> */}
         <UnPrivateComponent Component={RelativeViews} ForRestView={CustomerForCustomer} ForCustomerView={CustomerForCustomer} ForDeliveryView={CustomerForCustomer} path="/customers/:id" />
+        <UnPrivateComponent Component={RelativeViews} ForRestView={RestaurantForCustomer} ForCustomerView={RestaurantForCustomer} ForDeliveryView={RestaurantForCustomer} path="/restaurants/:id" />
         {/* <UnPrivateComponent Component={Delivery} path="deliveries" /> */}
         {/* <UnPrivateComponent Component={Customer} path="customers" /> */}
 

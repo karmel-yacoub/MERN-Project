@@ -94,7 +94,7 @@ export default function Album() {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    image={restaurant.picture}
                     title={restaurant.name}
                   />
                   <CardContent className={classes.cardContent}>
@@ -102,11 +102,11 @@ export default function Album() {
                     {restaurant.name}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                      {restaurant.location}
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                  <Button size="medium" color="primary">
                       <Link to={'restaurants/' + restaurant._id}>View</Link>
                     </Button>
                   </CardActions>
