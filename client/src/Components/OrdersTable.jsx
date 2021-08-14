@@ -70,6 +70,7 @@ export default function OrdersTable() {
               <TableCell>{order.price}</TableCell>
               <TableCell>{order.date}</TableCell>
               <TableCell>{order.amount}</TableCell>
+              <TableCell>{order.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
