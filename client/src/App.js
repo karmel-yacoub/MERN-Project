@@ -20,8 +20,8 @@ import RelativeViews from './Components/RelativeViews';
 import Profile from './Components/Profile';
 import Navbar from './Components/Navbar';
 
-import Profile from './Components/Profile';
-import Navbar from './Components/Navbar';
+
+
 import CreateMeal from './Components/CreateMeal';
 import CustomerForCustomer from './Components/CustomerForCustomer';
 import Prof from './Components/Prof';
