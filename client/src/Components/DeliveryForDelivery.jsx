@@ -13,15 +13,17 @@ const DeliveryForDelivery = (props) => {
     const [data ,setData] = useState({})
     const [loaded ,setLoaded] = useState(false)
     const [tabledata , setTabledata] = useState([])
+    const [reRender, setReRender] = useState(true)
 
       
-      const tableHeaders = ["Restaurant", "Customer" ,"Date", "Price" , "Action"];
+      const tableHeaders = ["Restaurant", "Customer" ,"Date", "Price" ,"Status", "Action"];
       
       const tableBodies = [
         `restaurant.name`,
         `customer.name`,
         `createdAt`,
         'price',
+        'status',
         {
           base: "/user",
           param: `id`,
@@ -57,7 +59,7 @@ const DeliveryForDelivery = (props) => {
             })
             .catch(err => err)
         }
-    },[id, user])
+    },[id, user , reRender])
     
     return (
         <div className={styles.flexo}>
@@ -74,6 +76,8 @@ const DeliveryForDelivery = (props) => {
                         data={tabledata}
                         tableHeaders={tableHeaders}
                         tableBodies={tableBodies}
+                        setReRender={setReRender}
+                        reRender={reRender}
                         />
                 </div>
                 :

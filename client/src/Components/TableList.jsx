@@ -67,6 +67,10 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
 
   console.log('genre' , user.genre)
 
+  useEffect(()=>{
+
+  },[reRender])
+
 
   const onClickChangeStatus = (e,id) =>{
     axios.put('http://localhost:8000/api/orders/status/'+id )
@@ -83,7 +87,6 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
     }) 
     .then(setReRender(!reRender))
     .catch(err => console.log(err))
-    setReRender(!reRender)
 
   }
 
@@ -135,7 +138,16 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
                 </>
                 :
                 user.genre === 'delivery' ?
-                <p>Delivery Row</p>
+                <>
+                {
+                data.status === 'readyToDeliver' ?
+                <TableCell >
+                    <button onClick={ (e) => onClickHandler(e , data._id)}>Accept</button>
+                </TableCell>
+                :
+                null
+                }
+                </>
                 :
                 null
                 }
