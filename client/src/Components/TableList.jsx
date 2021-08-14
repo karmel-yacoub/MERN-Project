@@ -73,6 +73,7 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
 
 
   const onClickChangeStatus = (e,id) =>{
+    e.preventDefault()
     axios.put('http://localhost:8000/api/orders/status/'+id )
     .then(res => {
       setReRender(!reRender)
@@ -80,12 +81,26 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
   }
 
   const onClickHandler =(e , id)=>{
+    e.preventDefault()
     console.log("id" , id)
     console.log('delivery' , delivery)
     axios.put('http://localhost:8000/api/orders/delivery/' + id,{
       delivery
     }) 
     .then(setReRender(!reRender))
+    .catch(err => console.log(err))
+
+  }
+
+  const onClickDelevery = (e , id) => {
+    e.preventDefault()
+    console.log('delivery' , user._id , id)
+    axios.put('http://localhost:8000/api/orders/' + id)
+    .then(res =>{
+      console.log('axios')
+      console.log(res)
+      setReRender(!reRender)
+    })
     .catch(err => console.log(err))
 
   }
@@ -142,7 +157,7 @@ const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) 
                 {
                 data.status === 'readyToDeliver' ?
                 <TableCell >
-                    <button onClick={ (e) => onClickHandler(e , data._id)}>Accept</button>
+                    <button onClick={ (e) => onClickDelevery(e , data._id)}>Accept</button>
                 </TableCell>
                 :
                 null

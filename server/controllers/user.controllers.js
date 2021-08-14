@@ -105,13 +105,13 @@ module.exports.createOrder = (req, res) => {
 }
 
 module.exports.deliveryOrderUpdate = async (req, res) => {
-    const { delivery } = req.body
-    Order.findOneAndUpdate({ _id: req.params.id }, { $set: { "delivery": delivery } }, { new: true, runValidators: true })
+    console.log('update')
+    Order.findOneAndUpdate({ _id: req.params.id }, { $set: { status: 'inWay' } }, { new: true, runValidators: true })
         .then(
-            order => {
-                Order.findOneAndUpdate({ _id: req.params.id }, { status: 'inWay' }, { new: true, runValidators: true })
-                    .then(order => res.json(order))
-            })
+            order =>{
+                res.json(order)
+                console.log('inWay')
+            } )
         .catch(err => response.status(400).json(err))
 }
 
