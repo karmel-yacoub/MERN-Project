@@ -23,7 +23,7 @@ module.exports.findUserOrders = (req, res) => {
 }
 
 module.exports.findRestaurantOrders = (req, res) => { 
-    Order.find({restaurant: req.params.id}).populate('customer restaurant')
+    Order.find({restaurant: req.params.id}).populate('customer restaurant delivery')
         .then(orders => res.json(orders))
         .catch(err => res.json(err))
 }
@@ -41,10 +41,26 @@ module.exports.changeOrderStatus = (req, res) => {
             else if(order.status == "accepted") order.status='readyToDeliver'
             else if(order.status == "readyToDeliver") order.status='inWay'
             else if(order.status == "inWay") order.status='delivered'
-            else if(order.status == "delivered") order.status='delivered'
+            else if(order.status == "delivered") order.status='requested'
             order.save()
             return order
         })
         .then(order =>res.json(order))
         .catch(err => res.json(err))
 }
+
+module.exports.deliverySelect = async (req, res) => {
+    const {delivery}= req.body
+    console.log(delivery)
+    Order.findOneAndUpdate({_id: req.params.id},{$set: {"delivery": delivery }} , {new:true , runValidators:true} )
+        .then(
+            order => {
+                res.json(order)
+            // order =>{ Order.findOneAndUpdate({_id: req.params.id},{status:'accepted'} , {new:true , runValidators:true} )
+            // .then(order => res.json(order))}
+            console.log("Delivery Selected")
+            }
+            )
+        .catch(err => response.status(400).json(err))
+}
+

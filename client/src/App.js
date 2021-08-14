@@ -35,8 +35,8 @@ import DeliveryForCustomer from './Components/DeliveryForCustomer';
 
 function App() {
   const { user, setUser, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
-  console.log(user);
-  console.log(isAuthenticated);
+  // console.log(user);
+  // console.log(isAuthenticated);
   return (
     <div className="App">
       <Navbar position="relative" title="Food is here" link1="Login" ref1="/login" link2="Register" ref2="/registration" />
@@ -47,7 +47,7 @@ function App() {
         <RegistrationForm path="/registration" />
 
         <LandingPage path='/' />
-        <LandingPage path='/' />
+
 
 
 

@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useState , useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -56,15 +56,35 @@ const ButtonLink = prop => {
   );
 };
 
-const onClickHandler = (e,id) =>{
-  axios.put('http://localhost:8000/api/orders/status/'+id )
-  .then(res => console.log(res))
-}
 
-const TableList = ({ data, tableHeaders, tableBodies }) => {
+
+const TableList = ({ data, tableHeaders, tableBodies ,setReRender , reRender }) => {
+
   const classes = useStyles();
-  console.log('ddd' , tableBodies[5])
+  // console.log('ddd' , tableBodies[5])
   const [delivery , setDelivery] = useState('')
+
+
+  const onClickChangeStatus = (e,id) =>{
+    axios.put('http://localhost:8000/api/orders/status/'+id )
+    .then(res => {
+      setReRender(!reRender)
+    })
+  }
+
+  const onClickHandler =(e , id)=>{
+    console.log("id" , id)
+    console.log('delivery' , delivery)
+    axios.put('http://localhost:8000/api/orders/delivery/' + id,{
+      delivery
+    }) 
+    .then(setReRender(!reRender))
+    .catch(err => console.log(err))
+    setReRender(!reRender)
+
+  }
+
+  console.log('data' , data)
 
   return (
     <Paper className={classes.root}>
@@ -86,17 +106,41 @@ const TableList = ({ data, tableHeaders, tableBodies }) => {
                   ) : 
                   null
                 )}
-                <TableCell >
-                  <select onChange={setDelivery}>
-                    <option value='' hidden></option>
-                    {tableBodies[5].map((item,idx)=>{
-                      return <option key={idx} value={item._id}>{item.name}</option>
-                    })}
-                  </select>
-                </TableCell>
-                <TableCell >
-                  <button onClick={ (e) => onClickHandler(e,data._id)}>Action</button>
-                </TableCell>
+
+                {
+                  data["delivery"] === undefined ?
+                  <>
+                    <TableCell >
+                    <select onChange={(e)=>setDelivery(e.target.value)}>
+                      <option value='' hidden></option>
+                      {tableBodies[5].map((item,idx)=>{
+                        return <option key={idx} value={item._id}>{item.name}</option>
+                      })}
+                    </select>
+                  </TableCell>
+                  
+                  <TableCell >
+                    <button onClick={ (e) => onClickHandler(e , data._id)}>Select Delivery</button>
+                  </TableCell>
+                </>
+                :
+                  null
+                }
+
+                {
+                  data.status === 'requested' ?
+                  <TableCell >
+                    <button onClick={ (e) => onClickChangeStatus(e,data._id)}>Accept</button>
+                  </TableCell>
+                  :
+                  data.status === 'accepted' ?
+                  <TableCell >
+                    <button onClick={ (e) => onClickChangeStatus(e,data._id)}>Ready</button>
+                  </TableCell>
+                  :
+                  null
+                }
+                
               </TableRow>
             ))}
           </TableBody>

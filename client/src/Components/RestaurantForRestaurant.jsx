@@ -14,7 +14,7 @@ const RestaurantForRestaurant = (props) => {
   const [data, setData] = useState({})
   const [loaded, setLoaded] = useState(false)
   const [tabledata, setTabledata] = useState([])
-
+  const [reRender, setReRender] = useState(false)
   const tableHeaders = ["Customer", "Delivery", "Date", "Price", "Status"];
   const [deleveries, setDeliveries] = useState([])
 
@@ -32,6 +32,7 @@ const RestaurantForRestaurant = (props) => {
     }
   ];
 
+
   useEffect(() => {
 
     if (id === user._id) {
@@ -39,7 +40,7 @@ const RestaurantForRestaurant = (props) => {
       setLoaded(true)
       axios.get('http://localhost:8000/api/orders/restaurant/' + user._id)
         .then(res => {
-          console.log('table data', res.data)
+          // console.log('table data',res.data)
           setTabledata(res.data)
         })
         .catch(err => console.log(err))
@@ -47,20 +48,17 @@ const RestaurantForRestaurant = (props) => {
     else if (id !== user._id) {
       axios.get('http://localhost:8000/api/users/' + id)
         .then(res => {
-          console.log('not same', res.data)
           setData(res.data)
           setLoaded(true)
         })
         .catch(err => err)
     }
-    axios.get('http://localhost:8000/api/deliveries')
-      .then(res => {
-        console.log('deliveries', res.data)
-        setDeliveries(res.data)
-      })
-      .catch(err => console.log(err))
 
-  }, [id, user])
+
+    axios.get('http://localhost:8000/api/deliveries')
+      .then(res => console.log('deliveries', res.data))
+      .catch(err => err)
+  }, [id, user, reRender])
 
   return (
     <div className={styles.flexo}>
@@ -72,18 +70,15 @@ const RestaurantForRestaurant = (props) => {
           </div>
           {
             user._id === id ?
-              <div>
-                <div className={styles.table}>
-                  <TableList
-                    data={tabledata}
-                    tableHeaders={tableHeaders}
-                    tableBodies={tableBodies}
-                  />
-                </div>
-                <Menu id={id} />
-
+              <div className={styles.table}>
+                <TableList
+                  data={tabledata}
+                  tableHeaders={tableHeaders}
+                  tableBodies={tableBodies}
+                  setReRender={setReRender}
+                  reRender={reRender}
+                />
               </div>
-
               :
               null
           }
@@ -92,5 +87,6 @@ const RestaurantForRestaurant = (props) => {
     </div>
   )
 }
+>>>>>>> 8a7b3250e015471328c20f5cac58dd4aadf4bfab
 
 export default RestaurantForRestaurant
