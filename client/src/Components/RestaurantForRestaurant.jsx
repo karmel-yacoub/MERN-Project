@@ -13,48 +13,17 @@ const RestaurantForRestaurant = (props) => {
     const [data ,setData] = useState({})
     const [loaded ,setLoaded] = useState(false)
     const [tabledata , setTabledata] = useState([])
-
-
-
-
-    // const Tabledata = [
-    //     {
-    //       id: 23,
-    //       order: {
-    //         owner: {
-    //           id: 5,
-    //           user: {
-    //             id: 4,
-    //             first_name: "John",
-    //             last_name: "Doe"
-    //           }
-    //         }
-    //       },
-    //       application_date: "2020-07-06"
-    //     },
-    //     {
-    //       id: 24,
-    //       order: {
-    //         owner: {
-    //           id: 5,
-    //           user: {
-    //             id: 4,
-    //             first_name: "Jane",
-    //             last_name: "Doe"
-    //           }
-    //         }
-    //       },
-    //       application_date: "2020-07-06"
-    //     }
-    //   ];
       
-      const tableHeaders = ["Customer", "Delivery" ,"Date", "Price" , "Action"];
+    const tableHeaders = ["Customer", "Delivery" ,"Date", "Price" , "Status"];
+    const [deleveries , setDeliveries] = useState([])
       
       const tableBodies = [
         `customer.name`,
         `delivery.name`,
         `createdAt`,
         'price',
+        'status',
+        deleveries,
         {
           base: "/user",
           param: `id`,
@@ -89,6 +58,13 @@ const RestaurantForRestaurant = (props) => {
             })
             .catch(err => err)
         }
+      axios.get('http://localhost:8000/api/deliveries')
+      .then(res => {
+        console.log('deliveries' , res.data)
+        setDeliveries(res.data)
+      })
+      .catch(err => console.log(err))
+
     },[id, user])
     
     return (

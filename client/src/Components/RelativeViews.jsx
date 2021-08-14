@@ -5,7 +5,7 @@ import { AuthContext } from '../Context/AuthContext';
 const RelativeViews = ({ ForRestView, ForCustomerView, ForDeliveryView, id }) => {
     const { user } = useContext(AuthContext);
     return (
-        <div style={{ margin: "1%" }}>
+        <div style={{ margin: "1%" , width:'100%'}}>
             {
                 user.genre === "restaurant" ?
                     <ForRestView id={id} /> :
