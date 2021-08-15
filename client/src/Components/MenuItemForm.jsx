@@ -7,6 +7,46 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    icon: {
+        marginRight: theme.spacing(2),
+    },
+    heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 0, 6),
+    },
+    heroButtons: {
+        marginTop: theme.spacing(4),
+    },
+    cardGrid: {
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),
+    },
+    card: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    cardMedia: {
+        paddingTop: '56.25%', // 16:9
+    },
+    cardContent: {
+        flexGrow: 1,
+    },
+    footer: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(6),
+    },
+    appBar: {
+        position: 'relative',
+    },
+    title: {
+        marginLeft: theme.spacing(2),
+        flex: 1,
+    },
+}));
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
@@ -14,6 +54,9 @@ export default function FormDialog(props) {
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState("");
     const [picture, setPicture] = useState("");
+    const classes = useStyles();
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -48,7 +91,7 @@ export default function FormDialog(props) {
 
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            <Button size="large" color="primary" className={classes.margin} variant="contained" onClick={handleClickOpen}>
                 Add a new item to menu
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -106,6 +149,6 @@ export default function FormDialog(props) {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </div >
     );
 }

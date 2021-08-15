@@ -133,7 +133,7 @@ const Menu = (props) => {
 
     return (
         <div>
-            {user._id === props.id ? <MenuItemForm updateMenuItems={updateMenuItems} menuItems={menuItems} /> : null}
+
             <React.Fragment>
 
                 <main>
@@ -189,7 +189,7 @@ const Menu = (props) => {
                                 user.genre === "customer" ?
                                     <div style={{ margin: "0 auto" }}>
                                         {menuItems.length > 0 ?
-                                            <Button size="large" color="primary" className={classes.margin} variant="contained" color="primary" onClick={handleClickOpen}>
+                                            <Button size="large" color="primary" className={classes.margin} variant="contained" onClick={handleClickOpen}>
                                                 Order!
                                             </Button> :
                                             null
@@ -229,11 +229,15 @@ const Menu = (props) => {
                                     </div> :
                                     null
                             }
+
                         </Grid>
+
                     </Container>
+                    {user._id === props.id ? <MenuItemForm updateMenuItems={updateMenuItems} menuItems={menuItems} /> : null}
                 </main>
 
             </React.Fragment>
+
         </div >
     )
 }

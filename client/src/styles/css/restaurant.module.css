@@ -1,7 +1,7 @@
 .flexo {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 60%;
   }
 
   .table{
@@ -14,6 +14,16 @@
     flex: 1;
     margin: 5%;
     margin-top: 0px;
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    .flexo {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 
   

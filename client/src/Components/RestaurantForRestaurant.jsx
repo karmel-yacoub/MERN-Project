@@ -6,6 +6,7 @@ import Prof from './Prof'
 import TableList from './TableList'
 import styles from '../styles/css/restaurant.module.css'
 import Menu from './Menu'
+import moment from 'moment'
 // import VisibilityIcon from "@material-ui/icons/Visibility";
 
 const RestaurantForRestaurant = (props) => {
@@ -35,18 +36,21 @@ const RestaurantForRestaurant = (props) => {
 
   useEffect(() => {
 
-      axios.get('http://localhost:8000/api/deliveries')
-      .then(res =>{
+    axios.get('http://localhost:8000/api/deliveries')
+      .then(res => {
         setDeliveries(res.data)
-        console.log('deliveries' , res.data)
+        console.log('deliveries', res.data)
       })
 
     if (id === user._id) {
       setData(user)
-      
+
       axios.get('http://localhost:8000/api/orders/restaurant/' + user._id)
         .then(res => {
           // console.log('table data',res.data)
+          res.data.map(item => {
+            item.createdAt = moment(item.createdAt).calendar();
+          })
           setTabledata(res.data)
           setLoaded(true)
         })
