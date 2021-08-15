@@ -125,7 +125,7 @@ const Menu = (props) => {
             .then(res => {
                 console.log(res);
                 handleClose();
-                navigate("/")
+                navigate("/customers/" + user._id)
             })
             .catch(err => console.log(err))
 
