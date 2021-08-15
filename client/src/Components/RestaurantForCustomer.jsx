@@ -5,6 +5,7 @@ import RelativeViews from './RelativeViews';
 import Prof from './Prof';
 import OrdersTable from './OrdersTable';
 import axios from 'axios';
+import Menu from './Menu';
 
 const RestaurantForCustomer = ({ id }) => {
     const [data, setData] = useState({})
@@ -28,7 +29,7 @@ const RestaurantForCustomer = ({ id }) => {
         <div>
             {loaded && <>
                 <Prof data={data} />
-                {/* menu */}
+                <Menu id={id} />
             </>
             }
         </div>
