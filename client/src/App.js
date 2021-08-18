@@ -29,6 +29,7 @@ import RestaurantForCustomer from './Components/RestaurantForCustomer';
 import DeliveryForDelivery from './Components/DeliveryForDelivery';
 import DeliveryForRestaurant from './Components/DeliveryForRestaurant';
 import DeliveryForCustomer from './Components/DeliveryForCustomer';
+import TogglableTabs from './Components/TogglableTabs';
 
 
 
@@ -41,7 +42,7 @@ function App() {
     <div className="App">
       <Navbar position="relative" title="Food is here" link1="Login" ref1="/login" link2="Register" ref2="/registration" />
       <Router>
-        <Home path="/home" />
+        <TogglableTabs path="/home" />
         {/* <Restaurant path="/restaurants" /> */}
         <Login path="/login" />
         <RegistrationForm path="/registration" />
